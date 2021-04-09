@@ -9,7 +9,7 @@ const {
   validation,
 } = require("../middlewares/employerMiddlewares/employer");
 
-router.post("signup", registerValidation(), validation, Signup);
+router.post("/signup", registerValidation(), validation, Signup);
 router.post("/signin", signinValidation(), validation, SignIn);
 router.get("/current", isAuth, (req, res) => {
   res.send(req.employer);

@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 exports.Signup = async (req, res) => {
   try {
     //   req.body
-    const { firstName, lastName, address, state, email, password } = req.body;
+    const { companyName, address, state, email, password } = req.body;
 
     // check if the email is not found in the database
     const FoundEmployer = await Employer.findOne({ email });
@@ -18,8 +18,7 @@ exports.Signup = async (req, res) => {
       return;
     }
     const newEmployer = new Employer({
-      firstName,
-      lastName,
+      companyName,
       address,
       state,
       email,

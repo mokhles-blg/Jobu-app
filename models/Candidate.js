@@ -28,7 +28,7 @@ const CandidateSchema = new Schema({
     type: String,
   },
   phoneNumber: {
-    type: Number,
+    type: String,
     required: true,
   },
   email: {
@@ -46,7 +46,7 @@ const CandidateSchema = new Schema({
     type: String,
   },
   workExperience: {
-    type: Number,
+    type: String,
   },
 });
 

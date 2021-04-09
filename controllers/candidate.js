@@ -79,7 +79,7 @@ exports.SignIn = async (req, res) => {
 
     // send an error if he didnt exist
     if (!searchCandidate) {
-      res.status(400).send({ errors: [{ msg: "Bad Credential" }] });
+      res.status(400).send({ errors: [{ msg: "User not found" }] });
       return;
     }
     // check if the send it password is equal to the current Password

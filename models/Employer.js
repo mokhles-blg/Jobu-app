@@ -2,11 +2,7 @@ const mongoose = require("mongoose");
 const { Schema, model } = mongoose;
 
 const EmployerSchema = new Schema({
-  firstName: {
-    type: String,
-    required: true,
-  },
-  lastName: {
+  companyName: {
     type: String,
     required: true,
   },

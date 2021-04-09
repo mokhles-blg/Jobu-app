@@ -17,7 +17,7 @@ exports.SignIn = async (req, res) => {
       return;
     }
     // check if the send it password is equal to the current Password
-    const hashedpass = searchAdmin.password;
+    const hashedpass = searchAdmin._doc.password;
     const result = await bcrypt.compare(password, hashedpass);
     if (!result) {
       res.status(400).send({ errors: [{ msg: "Bad Credential" }] });
