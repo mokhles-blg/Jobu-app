@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const Admin = require("../../models/Admin");
+const User = require("../models/User");
 
 const isAuth = async (req, res, next) => {
   try {
@@ -13,15 +13,15 @@ const isAuth = async (req, res, next) => {
     const decoded = await jwt.verify(token, process.env.SECRET_KEY);
 
     // search the user
-    const admin = await Admin.findById(decoded.id).select("-password");
+    const user = await User.findById(decoded.id).select("-password");
 
     // send not authorisation IF NOT USER
-    if (!admin) {
+    if (!user) {
       return res.status(400).send({ errors: [{ msg: "Unauthorized" }] });
     }
 
     // if user exist
-    req.admin = admin;
+    req.user = user;
 
     next();
   } catch (error) {

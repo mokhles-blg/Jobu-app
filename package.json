@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "back": "nodemon server",
-    "start": "node server.js"
+    "front": "cd client && npm start",
+    "dev": "concurrently \"npm run front\" \"npm run back\""
   },
   "keywords": [
     "node",

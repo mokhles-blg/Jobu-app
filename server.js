@@ -8,9 +8,8 @@ connectDB();
 // middleware global
 app.use(express.json());
 // router
-app.use("/api/admin", require("./router/admin"));
-app.use("/api/candidate", require("./router/candidate"));
-app.use("/api/employer", require("./router/employer"));
+app.use("/api/user", require("./router/user"));
+
 const PORT = process.env.PORT;
 
 app.listen(PORT, (err) =>
