@@ -1,4 +1,6 @@
+import { useEffect } from "react";
 import { Switch, Route } from "react-router";
+import { useDispatch } from "react-redux";
 import Errors from "./pages/Errors";
 import LandPage from "./pages/LandPage";
 import Profile from "./pages/Profile";
@@ -10,9 +12,16 @@ import CreatePost from "./pages/CreatePost";
 import PostDetails from "./pages/PostDetails";
 import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
+import { currentUser } from "./JS/actions/user";
+import PrivateRoute from "./router/PrivateRoute";
 import "./App.css";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(currentUser());
+  }, [dispatch]);
   return (
     <div className="App">
       <Navbar />
@@ -23,7 +32,7 @@ function App() {
         <Route path="/signup" component={SignUp} />
         <Route path="/searchingPage" component={SearchingPage} />
         <Route path="/postDetails" component={PostDetails} />
-        <Route path="/profile" component={Profile} />
+        <PrivateRoute path="/profile" component={Profile} />
         <Route path="/applicationForm" component={ApplicationForm} />
         <Route path="/createPost" component={CreatePost} />
         <Route path="/*" component={Errors} />
