@@ -5,19 +5,19 @@ const jwt = require("jsonwebtoken");
 
 exports.Signup = async (req, res) => {
   try {
-    //   req.body
-    const { role, name, email, password } = req.body;
+    // req.body
+    const { name, role, email, password, phone } = req.body;
 
-    // check if the email is not found in the database
+    // check if the email already exists in the database
     const FoundUser = await User.findOne({ email });
 
     if (FoundUser) {
       res.status(400).send({
-        errors: [{ msg: "user already exist email should be unique" }],
+        errors: [{ msg: "user already exists, email should be unique" }],
       });
       return;
     }
-    const newUser = new User({ role, name, email, password });
+    const newUser = new User({ name, role, email, password, phone });
 
     // hash the password
     const hashedpassword = bcrypt.hashSync(password, salt);
@@ -31,12 +31,14 @@ exports.Signup = async (req, res) => {
       process.env.SECRET_KEY,
       { expiresIn: 60 * 60 }
     );
-    //then we save it in the database
+    // save the new user in the database
     await newUser.save();
-    res.status(200).send({ msg: "user saved succ", user: newUser, token });
+    res
+      .status(200)
+      .send({ msg: "user registered successfully", user: newUser, token });
   } catch (error) {
     console.log(error);
-    res.status(400).send({ errors: [{ msg: "can not save the user" }] });
+    res.status(400).send({ errors: [{ msg: "can not register the user" }] });
   }
 };
 
@@ -44,7 +46,7 @@ exports.SignIn = async (req, res) => {
   try {
     // get the req.body
     const { email, password } = req.body;
-    // seach if the user exist
+    // search if the user exists
     const searchUser = await User.findOne({ email });
 
     // send an error if he didnt exist
@@ -52,7 +54,7 @@ exports.SignIn = async (req, res) => {
       res.status(400).send({ errors: [{ msg: "Bad Credential" }] });
       return;
     }
-    // check if the send it password is equal to the current Password
+    // check if the sent password is equal to the current Password
     const hashedpass = searchUser.password;
     const result = await bcrypt.compare(password, hashedpass);
     if (!result) {
