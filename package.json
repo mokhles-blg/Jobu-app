@@ -15,7 +15,7 @@
     "react",
     "redux"
   ],
-  "author": "baligh",
+  "author": "baligh & mokhles",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",

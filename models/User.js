@@ -6,7 +6,11 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
-  name: {
+  firstName: {
+    type: String,
+    required: true,
+  },
+  lastName: {
     type: String,
     required: true,
   },
@@ -18,6 +22,10 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
+  phone: Number,
+  region: String,
+  address: String,
+  gender: String,
 });
 
 module.exports = User = model("user", UserSchema);
