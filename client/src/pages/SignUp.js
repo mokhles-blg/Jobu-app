@@ -27,7 +27,6 @@ const SignUp = ({ history }) => {
       </video>
       <div className="video-overlay header-text">
         <div className="caption">
-          <h6>Lorem ipsum dolor sit amet</h6>
           <h2>
             Find the perfect <em>Job</em>
           </h2>

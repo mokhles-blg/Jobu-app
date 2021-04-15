@@ -16,6 +16,7 @@ exports.addJob = async (req, res) => {
       remuneration,
       language,
       gender,
+      carrerLevel,
     } = req.body;
     // fields required
     if (!title || !company || !location || !description) {
@@ -35,6 +36,7 @@ exports.addJob = async (req, res) => {
       remuneration,
       language,
       gender,
+      careerLevel,
     });
     await newJob.save();
     res.status(200).send({ msg: "Job posted successfully", newJob });
@@ -69,7 +71,23 @@ exports.updateJob = async (req, res) => {
 // viewer crud
 exports.getListJobs = async (req, res) => {
   try {
-    const listJobs = await Job.find();
+    const filter = req.query;
+    const finalFilter = {};
+    filter.type ? (finalFilter.type = filter.type) : "";
+    filter.category ? (finalFilter.category = filter.category) : "";
+    filter.careerLevel ? (finalFilter.careerLevel = filter.careerLevel) : "";
+
+    const listJobs = await Job.find({
+      title: {
+        $regex: filter.keyword ? ".*" + filter.keyword + ".*" : "",
+        $options: "i",
+      },
+      location: {
+        $regex: filter.location ? ".*" + filter.location + ".*" : "",
+        $options: "i",
+      },
+      ...finalFilter,
+    });
     res.status(200).send({ msg: "this is the list of jobs", listJobs });
   } catch (error) {
     res.status(400).send({ msg: "can not get contacts", error });

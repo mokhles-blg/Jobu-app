@@ -9,7 +9,8 @@ const NavbarX = () => {
 
   const history = useHistory();
 
-  const logoutAndRedirect = () => {
+  const logoutAndRedirect = (e) => {
+    e.preventDefault();
     history.push("/");
     dispatch(logout());
   };
@@ -24,7 +25,7 @@ const NavbarX = () => {
               <nav className="main-nav">
                 {/* ***** Logo Start ***** */}
                 <a href="index.html" className="logo">
-                  Job Agency<em> Website</em>
+                  JOB<em>U</em>
                 </a>
                 {/* ***** Logo End ***** */}
                 {/* ***** Menu Start ***** */}

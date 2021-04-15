@@ -14,7 +14,7 @@ const PostDetails = () => {
         href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap"
         rel="stylesheet"
       />
-      <title>PHPJabbers.com | Free Job Agency Website Template</title>
+      <title>Post Details</title>
       <link
         rel="stylesheet"
         type="text/css"
@@ -240,19 +240,6 @@ const PostDetails = () => {
         </div>
       </section>
       {/* ***** Fleet Ends ***** */}
-      {/* ***** Footer Start ***** */}
-      <footer>
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-12">
-              <p>
-                Copyright © 2020 Company Name - Template by:{" "}
-                <a href="https://www.phpjabbers.com/">PHPJabbers.com</a>
-              </p>
-            </div>
-          </div>
-        </div>
-      </footer>
       {/* Modal */}
       <div
         className="modal fade"

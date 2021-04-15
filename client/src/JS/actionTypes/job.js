@@ -1,0 +1,1 @@
+export const SET_JOBS_FILTER = "SET_JOBS_FILTER";

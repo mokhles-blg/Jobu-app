@@ -22,6 +22,7 @@ const JobSchema = new Schema({
   date: Date,
   jobType: String,
   experience: String,
+  carrerLevel: String,
   studyLevel: String,
   remuneration: String,
   language: String,

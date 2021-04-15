@@ -1,6 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import j1 from "../assets/images/product-1-720x480.jpg";
-const SearchingPage = () => {
+import SearchingBarForJobs from "../Components/SearchingBarForJobs";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { jobResults } from "../JS/actions/job";
+
+const Jobs = () => {
+  const search = useSelector((state) => state.jobReducer.search);
+  const listJobs = useSelector((state) => state.jobReducer.listJobs);
+  const dispatch = useDispatch();
+  useEffect(async () => {
+    const result = await axios.get("/api/jobs", {
+      params: search,
+    });
+    dispatch(jobResults(result.data.listJobs));
+  }, [search]);
+
   return (
     <div>
       <meta charSet="utf-8" />
@@ -14,7 +29,7 @@ const SearchingPage = () => {
         href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap"
         rel="stylesheet"
       />
-      <title>PHPJabbers.com | Free Job Agency Website Template</title>
+      <title>Jobs</title>
       <link
         rel="stylesheet"
         type="text/css"
@@ -165,127 +180,31 @@ const SearchingPage = () => {
               <br />
             </div>
             <div className="col-lg-8">
+              <SearchingBarForJobs />
               <div className="row">
-                <div className="col-md-6">
-                  <div className="trainer-item">
-                    <div className="image-thumb">
-                      <img src={j1} alt="" />
-                    </div>
-                    <div className="down-content">
-                      <span>
-                        {" "}
-                        <sup>$</sup>70 000{" "}
-                      </span>
-                      <h4>Lorem ipsum dolor sit amet, consectetur</h4>
-                      <p>Medical &nbsp;/&nbsp; Health Jobs</p>
-                      <ul className="social-icons">
-                        <li>
-                          <a href="job-details.html">+ View More</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-6">
-                  <div className="trainer-item">
-                    <div className="image-thumb">
-                      <img src={j1} alt="" />
-                    </div>
-                    <div className="down-content">
-                      <span>
-                        {" "}
-                        <sup>$</sup>70 000{" "}
-                      </span>
-                      <h4>Lorem ipsum dolor sit amet, consectetur</h4>
-                      <p>Medical &nbsp;/&nbsp; Health Jobs</p>
-                      <ul className="social-icons">
-                        <li>
-                          <a href="job-details.html">+ View More</a>
-                        </li>
-                      </ul>
+                {listJobs?.map((job) => (
+                  <div className="col-md-6">
+                    <div className="trainer-item">
+                      <div className="image-thumb">
+                        <img src={j1} alt="" />
+                      </div>
+                      <div className="down-content">
+                        <span>
+                          {" "}
+                          {job.remuneration}
+                          <sup>$</sup>
+                        </span>
+                        <h4>{job.title}</h4>
+                        <p>{job.category}</p>
+                        <ul className="social-icons">
+                          <li>
+                            <a href="job-details.html">+ View More</a>
+                          </li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="col-md-6">
-                  <div className="trainer-item">
-                    <div className="image-thumb">
-                      <img src={j1} alt="" />
-                    </div>
-                    <div className="down-content">
-                      <span>
-                        {" "}
-                        <sup>$</sup>70 000{" "}
-                      </span>
-                      <h4>Lorem ipsum dolor sit amet, consectetur</h4>
-                      <p>Medical &nbsp;/&nbsp; Health Jobs</p>
-                      <ul className="social-icons">
-                        <li>
-                          <a href="job-details.html">+ View More</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-6">
-                  <div className="trainer-item">
-                    <div className="image-thumb">
-                      <img src={j1} alt="" />
-                    </div>
-                    <div className="down-content">
-                      <span>
-                        {" "}
-                        <sup>$</sup>70 000{" "}
-                      </span>
-                      <h4>Lorem ipsum dolor sit amet, consectetur</h4>
-                      <p>Medical &nbsp;/&nbsp; Health Jobs</p>
-                      <ul className="social-icons">
-                        <li>
-                          <a href="job-details.html">+ View More</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-6">
-                  <div className="trainer-item">
-                    <div className="image-thumb">
-                      <img src={j1} alt="" />
-                    </div>
-                    <div className="down-content">
-                      <span>
-                        {" "}
-                        <sup>$</sup>70 000{" "}
-                      </span>
-                      <h4>Lorem ipsum dolor sit amet, consectetur</h4>
-                      <p>Medical &nbsp;/&nbsp; Health Jobs</p>
-                      <ul className="social-icons">
-                        <li>
-                          <a href="job-details.html">+ View More</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-6">
-                  <div className="trainer-item">
-                    <div className="image-thumb">
-                      <img src={j1} alt="" />
-                    </div>
-                    <div className="down-content">
-                      <span>
-                        {" "}
-                        <sup>$</sup>70 000{" "}
-                      </span>
-                      <h4>Lorem ipsum dolor sit amet, consectetur</h4>
-                      <p>Medical &nbsp;/&nbsp; Health Jobs</p>
-                      <ul className="social-icons">
-                        <li>
-                          <a href="job-details.html">+ View More</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
           </div>
@@ -324,25 +243,8 @@ const SearchingPage = () => {
         </div>
       </section>
       {/* ***** Fleet Ends ***** */}
-      {/* ***** Footer Start ***** */}
-      <footer>
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-12">
-              <p>
-                Copyright © 2020 Company Name - Template by:{" "}
-                <a href="https://www.phpjabbers.com/">PHPJabbers.com</a>
-              </p>
-            </div>
-          </div>
-        </div>
-      </footer>
-      {/* jQuery */}
-      {/* Bootstrap */}
-      {/* Plugins */}
-      {/* Global Init */}
     </div>
   );
 };
 
-export default SearchingPage;
+export default Jobs;
