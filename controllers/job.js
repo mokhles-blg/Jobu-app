@@ -97,8 +97,20 @@ exports.getListJobs = async (req, res) => {
 exports.getJob = async (req, res) => {
   try {
     const jobToGet = await Job.findOne({ _id: req.params.id });
-    res.status(200).send({ msg: " i got the job", jobToGet });
+    res.status(200).send({ msg: "I got the job", jobToGet });
   } catch (error) {
-    res.status(400).send({ msg: "can not get the job", jobToGet });
+    res.status(400).send({ msg: "Can not get the job", jobToGet });
+  }
+};
+
+//gets the savedjobs for a user
+exports.getJobs = async (req, res) => {
+  try {
+    const jobsToGet = await Job.find({
+      _id: { $in: JSON.parse(req.query.savedJobsIds) },
+    });
+    res.status(200).send({ msg: "I got the jobs", jobsToGet });
+  } catch (error) {
+    res.status(400).send({ msg: "Can not get the jobs", jobsToGet });
   }
 };

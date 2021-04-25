@@ -1,6 +1,8 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Form, Button } from "react-bootstrap";
 const ApplicationForm = () => {
+  const user = useSelector((state) => state.userReducer.user);
   return (
     <div>
       <meta charSet="utf-8" />
@@ -54,59 +56,21 @@ const ApplicationForm = () => {
           <br />
           <section className="tabs-content">
             <Form>
-              <Form.Group controlId="formBasicEmail">
-                <Form.Label>First Name </Form.Label>
-                <Form.Control type="firstName" placeholder="Enter first name" />
-              </Form.Group>
-              <Form.Group controlId="formBasicEmail">
-                <Form.Label>Last Name</Form.Label>
-                <Form.Control type="lastName" placeholder="Enter last name" />
-              </Form.Group>
-              <Form.Group controlId="formBasicEmail">
-                <Form.Label>Date of Birth</Form.Label>
-                <Form.Control
-                  type="date of birth"
-                  placeholder="Enter date of birth"
-                />
-              </Form.Group>
-              <Form.Group controlId="formBasicEmail">
-                <Form.Label>Address</Form.Label>
-                <Form.Control type="eaddress" placeholder="Enter address" />
-              </Form.Group>
-              <Form.Group controlId="formBasicEmail">
-                <Form.Label>Education</Form.Label>
-                <Form.Control type="education" placeholder="Enter education" />
-              </Form.Group>
-              <Form.Group controlId="formBasicEmail">
-                <Form.Label>Education Level</Form.Label>
-                <Form.Control
-                  type="level of education"
-                  placeholder="Enter level of education"
-                />
-              </Form.Group>
-              <Form.Group controlId="formBasicEmail">
-                <Form.Label>Work Experience</Form.Label>
-                <Form.Control
-                  type="work experience"
-                  placeholder="Enter work experience"
-                />
-              </Form.Group>
-              <Form.Group controlId="formBasicEmail">
-                <Form.Label>Phone Number</Form.Label>
-                <Form.Control
-                  type="phone number"
-                  placeholder="Enter phone number"
-                />
-              </Form.Group>
-              <Form.Group controlId="formBasicEmail">
-                <Form.Label>Email address</Form.Label>
-                <Form.Control type="email" placeholder="Enter email" />
-              </Form.Group>
-              <Form.Group controlId="formBasicPassword">
-                <Form.Label>Password</Form.Label>
-                <Form.Control type="password" placeholder="Password" />
-              </Form.Group>
-
+              <div>
+                {" "}
+                <Form.Group controlId="formBasicEmail">
+                  <Form.Label>Name: {user?.name}</Form.Label>
+                </Form.Group>
+                <Form.Group controlId="formBasicEmail">
+                  <Form.Label>E-mail Address: {user?.email}</Form.Label>
+                </Form.Group>
+                <Form.Group controlId="formBasicEmail">
+                  <Form.Label>Phone Number:{user?.phone}</Form.Label>
+                </Form.Group>
+                <Form.Group controlId="formBasicEmail">
+                  <Form.Label>Address: {user?.address}</Form.Label>
+                </Form.Group>
+              </div>
               <Button variant="primary" type="submit">
                 Submit
               </Button>

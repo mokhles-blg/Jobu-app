@@ -1,6 +1,8 @@
 import React from "react";
 import { Form, Button } from "react-bootstrap";
-
+import "../assets/css/bootstrap.min.css";
+import "../assets/css/font-awesome.css";
+import "../assets/css/style.css";
 const CreatePost = () => {
   return (
     <div>
@@ -16,17 +18,6 @@ const CreatePost = () => {
         rel="stylesheet"
       />
       <title>Create Post</title>
-      <link
-        rel="stylesheet"
-        type="text/css"
-        href="assets/css/bootstrap.min.css"
-      />
-      <link
-        rel="stylesheet"
-        type="text/css"
-        href="assets/css/font-awesome.css"
-      />
-      <link rel="stylesheet" href="assets/css/style.css" />
 
       <section
         className="section section-bg"

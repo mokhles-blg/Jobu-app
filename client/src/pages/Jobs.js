@@ -4,17 +4,32 @@ import SearchingBarForJobs from "../Components/SearchingBarForJobs";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { jobResults } from "../JS/actions/job";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBookmark } from "@fortawesome/free-solid-svg-icons";
+import { Button } from "react-bootstrap";
 
 const Jobs = () => {
   const search = useSelector((state) => state.jobReducer.search);
   const listJobs = useSelector((state) => state.jobReducer.listJobs);
+  const user = useSelector((state) => state.userReducer.user);
+  const isAuth = useSelector((state) => state.userReducer.isAuth);
+
   const dispatch = useDispatch();
+
   useEffect(async () => {
-    const result = await axios.get("/api/jobs", {
+    const result = await axios.get("/api/job", {
       params: search,
     });
     dispatch(jobResults(result.data.listJobs));
-  }, [search]);
+  }, [dispatch, search]);
+
+  const handleSaveClick = async (e) => {
+    if (isAuth) {
+      const jobId = e.currentTarget.getAttribute("jobId");
+      var data = { userId: user._id, jobId: jobId };
+      await axios.put("/api/user/saveJob", data);
+    }
+  };
 
   return (
     <div>
@@ -194,11 +209,21 @@ const Jobs = () => {
                           {job.remuneration}
                           <sup>$</sup>
                         </span>
-                        <h4>{job.title}</h4>
+                        <h4>
+                          {job.title <= 40
+                            ? job.title
+                            : job.title.slice(0, 25) + "..."}
+                        </h4>
                         <p>{job.category}</p>
                         <ul className="social-icons">
                           <li>
-                            <a href="job-details.html">+ View More</a>
+                            <a href={`/postDetails/${job._id}`}>+ View More</a>
+                          </li>
+                          <li>
+                            <Button jobId={job._id} onClick={handleSaveClick}>
+                              <FontAwesomeIcon icon={faBookmark} />
+                              &nbsp; Save
+                            </Button>
                           </li>
                         </ul>
                       </div>

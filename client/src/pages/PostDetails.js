@@ -1,6 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { Button } from "react-bootstrap";
+import axios from "axios";
+import "../assets/css/bootstrap.min.css";
+import "../assets/css/font-awesome.css";
+import "../assets/css/style.css";
+import { Helmet } from "react-helmet";
 
-const PostDetails = () => {
+const PostDetails = ({ match }) => {
+  const user = useSelector((state) => state.userReducer.user);
+  const [job, setJob] = useState();
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    async function fetchData() {
+      const jobDetails = await axios.get(`/api/job/${match.params.id}`);
+      setJob(jobDetails.data.jobToGet);
+      setReady(true);
+    }
+    if (!ready) {
+      fetchData();
+    }
+  }, [ready]);
   return (
     <div>
       <meta charSet="utf-8" />
@@ -8,25 +29,26 @@ const PostDetails = () => {
         name="viewport"
         content="width=device-width, initial-scale=1, shrink-to-fit=no"
       />
-      <meta name="description" content />
-      <meta name="author" content />
+      <meta name="description" />
+      <meta name="author" />
       <link
         href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap"
         rel="stylesheet"
       />
-      <title>Post Details</title>
-      <link
-        rel="stylesheet"
-        type="text/css"
-        href="assets/css/bootstrap.min.css"
-      />
-      <link
-        rel="stylesheet"
-        type="text/css"
-        href="assets/css/font-awesome.css"
-      />
-      <link rel="stylesheet" href="assets/css/style.css" />
+      <Helmet>
+        <script src="/assets/js/jquery-2.1.0.min.js"></script>
+        <script src="/assets/js/popper.js"></script>
+        <script src="/assets/js/bootstrap.min.js"></script>
+        <script src="/assets/js/scrollreveal.min.js"></script>
+        <script src="/assets/js/waypoints.min.js"></script>
+        <script src="/assets/js/jquery.counterup.min.js"></script>
+        <script src="/assets/js/imgfix.min.js"></script>
+        <script src="/assets/js/mixitup.js"></script>
+        <script src="/assets/accordions.js"></script>
+        <script src="/assets/js/custom.js"></script>
+      </Helmet>
 
+      <title>Post Details</title>
       {/* ***** Call to Action Start ***** */}
       <section
         className="section section-bg"
@@ -42,12 +64,16 @@ const PostDetails = () => {
                 <br />
                 <br />
                 <h2>
-                  <em>$70 000</em>
+                  <em>{job?.remuneration} DT</em>
                 </h2>
-                <p>Security officer - luxury retail</p>
-                <div className="main-button">
-                  <a href="#">Apply for this Job</a>
-                </div>
+                <p>{job?.title}</p>
+                {user?.role.toLowerCase() === "job seeker" ? (
+                  <div className="main-button">
+                    <Button href="/applicationForm">Apply for this Job</Button>
+                  </div>
+                ) : (
+                  ""
+                )}
               </div>
             </div>
           </div>
@@ -57,64 +83,6 @@ const PostDetails = () => {
       {/* ***** Fleet Starts ***** */}
       <section className="section" id="trainers">
         <div className="container">
-          <br />
-          <br />
-          <div
-            id="carouselExampleIndicators"
-            className="carousel slide"
-            data-ride="carousel"
-          >
-            <ol className="carousel-indicators">
-              <li
-                data-target="#carouselExampleIndicators"
-                data-slide-to={0}
-                className="active"
-              />
-              <li data-target="#carouselExampleIndicators" data-slide-to={1} />
-              <li data-target="#carouselExampleIndicators" data-slide-to={2} />
-            </ol>
-            <div className="carousel-inner">
-              <div className="carousel-item active">
-                <img
-                  className="d-block w-100"
-                  src="assets/images/job-image-1-1200x600.jpg"
-                  alt="First slide"
-                />
-              </div>
-              <div className="carousel-item">
-                <img
-                  className="d-block w-100"
-                  src="assets/images/job-image-1-1200x600.jpg"
-                  alt="Second slide"
-                />
-              </div>
-              <div className="carousel-item">
-                <img
-                  className="d-block w-100"
-                  src="assets/images/job-image-1-1200x600.jpg"
-                  alt="Third slide"
-                />
-              </div>
-            </div>
-            <a
-              className="carousel-control-prev"
-              href="#carouselExampleIndicators"
-              role="button"
-              data-slide="prev"
-            >
-              <span className="carousel-control-prev-icon" aria-hidden="true" />
-              <span className="sr-only">Previous</span>
-            </a>
-            <a
-              className="carousel-control-next"
-              href="#carouselExampleIndicators"
-              role="button"
-              data-slide="next"
-            >
-              <span className="carousel-control-next-icon" aria-hidden="true" />
-              <span className="sr-only">Next</span>
-            </a>
-          </div>
           <br />
           <br />
           <div className="row" id="tabs">
@@ -221,7 +189,7 @@ const PostDetails = () => {
                     <div className="col-sm-6">
                       <label>Email</label>
                       <p>
-                        <a href="#">john@carsales.com</a>
+                        <a href="">john@carsales.com</a>
                       </p>
                     </div>
                     <div className="col-sm-6">
@@ -345,10 +313,6 @@ const PostDetails = () => {
           </div>
         </div>
       </div>
-      {/* jQuery */}
-      {/* Bootstrap */}
-      {/* Plugins */}
-      {/* Global Init */}
     </div>
   );
 };

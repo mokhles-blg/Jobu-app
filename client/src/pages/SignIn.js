@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Form, Button, Container } from "react-bootstrap";
 import { login, videErrors } from "../JS/actions/user";
-import Errors from "../Components/Errors";
 import "../assets/css/bootstrap.min.css";
 import "../assets/css/font-awesome.css";
 import "../assets/css/style.css";
@@ -10,7 +9,6 @@ import v1 from "../assets/images/video.mp4";
 
 const SignIn = ({ history }) => {
   const [user, setuser] = useState({});
-  const errors = useSelector((state) => state.userReducer.errors);
   const dispatch = useDispatch();
   const handleChange = (e) => {
     setuser({ ...user, [e.target.name]: e.target.value });
@@ -37,9 +35,9 @@ const SignIn = ({ history }) => {
                 dispatch(login(user, history));
               }}
             >
-              {errors.length > 0
-                ? errors.map((el) => <Errors error={el} />)
-                : null}
+              {/* errors && errors.length > 0
+                ? errors.map((el, index) => <Errors key={index} error={el} />)
+              : null */}
               <Form.Group controlId="formBasicEmail">
                 <Form.Label>Email address</Form.Label>
                 <Form.Control

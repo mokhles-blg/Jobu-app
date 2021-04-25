@@ -5,6 +5,9 @@ import {
   LOGIN_USER,
   REGISTER_USER,
   LOGOUT_USER,
+  GET_USERS_LOAD,
+  GET_USERS_SUCCESS,
+  GET_USERS_FAIL,
 } from "../actionTypes/user";
 
 import axios from "axios";
@@ -20,7 +23,7 @@ export const register = (newUser, history) => async (dispatch) => {
   } catch (error) {
     console.log(error.response.data.errorrs);
     // error.response.data.errors.map((el) => alert(el.msg));
-    dispatch({ type: FAIL_USER, payload: error.response.data.errors });
+    dispatch({ type: FAIL_USER, payload: error.message });
   }
 };
 
@@ -37,7 +40,7 @@ export const login = (user, history) => async (dispatch) => {
     //     alert(el.msg);
     //   }, 3000)
     // );
-    dispatch({ type: FAIL_USER, payload: error.response.data.errors });
+    dispatch({ type: FAIL_USER, payload: error.message });
   }
 };
 
@@ -49,7 +52,7 @@ export const currentUser = () => async (dispatch) => {
     const result = await axios.get("/api/user/current", options);
     dispatch({ type: CURRENT_USER, payload: result.data });
   } catch (error) {
-    dispatch({ type: FAIL_USER, payload: error.response.data });
+    //dispatch({ type: FAIL_USER, payload: error.message });
   }
 };
 
@@ -63,4 +66,21 @@ export const videErrors = () => {
   return {
     type: "VIDE_ERRORS",
   };
+};
+
+export const showUsers = () => async (dispatch) => {
+  dispatch({ type: GET_USERS_LOAD });
+  try {
+    const res = await axios.get("/api/users/");
+    dispatch({
+      type: GET_USERS_SUCCESS,
+      payload: res.data.listUsers,
+    });
+  } catch (error) {
+    dispatch({
+      type: GET_USERS_FAIL,
+      payload: error,
+    });
+    console.log(error);
+  }
 };

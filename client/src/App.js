@@ -19,7 +19,6 @@ import "./App.css";
 
 function App() {
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(currentUser());
   }, [dispatch]);
@@ -33,11 +32,13 @@ function App() {
         <Route path="/signin" component={SignIn} />
         <Route path="/signup" component={SignUp} />
         <Route path="/jobs" component={Jobs} />
-        <Route path="/postDetails" component={PostDetails} />
+        <Route path="/postDetails/:id" component={PostDetails} />
         <PrivateRoute path="/profile" component={Profile} />
         <Route path="/applicationForm" component={ApplicationForm} />
         <Route path="/createPost" component={CreatePost} />
-        <Route path="/*" component={Errors} />
+        {/*
+       <Route path="/*" component={Errors} />
+        */}
       </Switch>
       <Footer />
     </div>

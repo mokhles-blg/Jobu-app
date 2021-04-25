@@ -13,8 +13,8 @@ const Errors = ({ error }) => {
   }, [alert, error, errors]);
   return (
     alert && (
-      <div class="alert alert-primary" role="alert">
-        {error.msg}
+      <div className="alert alert-primary" role="alert">
+        {error}
       </div>
     )
   );
