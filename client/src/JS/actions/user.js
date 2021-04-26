@@ -68,10 +68,10 @@ export const videErrors = () => {
   };
 };
 
-export const showUsers = () => async (dispatch) => {
+/*export const showUsers = () => async (dispatch) => {
   dispatch({ type: GET_USERS_LOAD });
   try {
-    const res = await axios.get("/api/users/");
+    const res = await axios.get("/api/user/users/");
     dispatch({
       type: GET_USERS_SUCCESS,
       payload: res.data.listUsers,
@@ -83,4 +83,4 @@ export const showUsers = () => async (dispatch) => {
     });
     console.log(error);
   }
-};
+};*/

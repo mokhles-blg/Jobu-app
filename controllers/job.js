@@ -5,43 +5,31 @@ exports.addJob = async (req, res) => {
   try {
     const {
       title,
-      company,
-      region,
+      location,
       description,
-      exigence,
-      date,
-      jobType,
-      experience,
-      studyLevel,
-      remuneration,
-      language,
-      gender,
-      carrerLevel,
+      category,
+      careerLevel,
+      type,
+      salary,
     } = req.body;
     // fields required
-    if (!title || !company || !location || !description) {
-      res.status(400).send({ msg: "these fields are required" });
+    if (!title || !location || !description || !salary) {
+      res.status(400).send({ msg: "One required field is missing" });
       return;
     }
     const newJob = new Job({
       title,
-      company,
-      region,
+      location,
       description,
-      exigence,
-      date,
-      jobType,
-      experience,
-      studyLevel,
-      remuneration,
-      language,
-      gender,
+      category,
       careerLevel,
+      type,
+      salary,
     });
     await newJob.save();
     res.status(200).send({ msg: "Job posted successfully", newJob });
   } catch (error) {
-    res.status(400).send({ msg: "can not add this job", error });
+    res.status(400).send({ msg: "Can not add this job", error });
   }
 };
 

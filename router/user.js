@@ -21,7 +21,7 @@ router.post("/signin", signinValidation(), validation, SignIn);
 router.get("/current", isAuth, (req, res) => {
   res.send(req.user);
 });
-router.get("/profile", ShowUserInfos);
+router.get("/profile/:id", ShowUserInfos);
 router.get("/users", ShowAllUsers);
 router.put("/saveJob", SaveJob);
 router.post("/uploadResume", UploadResume);

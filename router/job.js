@@ -7,18 +7,17 @@ const {
   getJob,
 } = require("../controllers/job");
 const router = express.Router();
-const isAuth = require("../middlewares/auth_jwt");
 
 // testing the router
 router.get("/test", (req, res) => {
   res.send("hello world");
 });
 
-router.post("/", isAuth, addJob);
+router.post("/addJob", addJob);
 
-router.delete("/:id", isAuth, deleteJob);
+router.delete("/:id", deleteJob);
 
-router.put("/:id", isAuth, updateJob);
+router.put("/:id", updateJob);
 
 router.get("/", getListJobs);
 

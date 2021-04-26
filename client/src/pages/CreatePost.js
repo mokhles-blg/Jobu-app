@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Form, Button } from "react-bootstrap";
+import { addJob } from "../JS/actions/job";
 import "../assets/css/bootstrap.min.css";
 import "../assets/css/font-awesome.css";
 import "../assets/css/style.css";
-const CreatePost = () => {
+const CreatePost = ({ history }) => {
+  const [newJob, setNewJob] = useState(null);
+  const dispatch = useDispatch();
+  const handleChange = (e) => {
+    setNewJob({ ...newJob, [e.target.name]: e.target.value });
+  };
   return (
     <div>
       <meta charSet="utf-8" />
@@ -40,33 +47,68 @@ const CreatePost = () => {
       </section>
       {/* ***** Testimonials Item Start ***** */}
       <section className="section" id="features">
-        <Form>
+        <Form
+          onSubmit={(event) => {
+            event.preventDefault();
+            dispatch(addJob(newJob, history));
+          }}
+        >
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Job Title </Form.Label>
-            <Form.Control type="title" placeholder="Enter title" />
-          </Form.Group>
-          <Form.Group controlId="formBasicEmail">
-            <Form.Label>Company name</Form.Label>
-            <Form.Control type="name" placeholder="Enter name" />
+            <Form.Control
+              type="title"
+              placeholder="Enter title"
+              onChange={handleChange}
+            />
           </Form.Group>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Salary</Form.Label>
-            <Form.Control type="salary" placeholder="Enter salary" />
+            <Form.Control
+              type="salary"
+              placeholder="Enter salary"
+              onChange={handleChange}
+            />
           </Form.Group>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Location</Form.Label>
-            <Form.Control type="location" placeholder="Enter location" />
+            <Form.Control
+              type="location"
+              placeholder="Enter location"
+              onChange={handleChange}
+            />
           </Form.Group>
           <Form.Group controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" placeholder="Enter email" />
+            <Form.Label>Job Category</Form.Label>
+            <Form.Control
+              type="category"
+              placeholder="Enter job category"
+              onChange={handleChange}
+            />
+          </Form.Group>
+          <Form.Group controlId="formBasicEmail">
+            <Form.Label>Job Type</Form.Label>
+            <Form.Control
+              type="type"
+              placeholder="Enter job type"
+              onChange={handleChange}
+            />
+          </Form.Group>
+          <Form.Group controlId="formBasicEmail">
+            <Form.Label>Career Level</Form.Label>
+            <Form.Control
+              type="careerLevel"
+              placeholder="Enter career level"
+              onChange={handleChange}
+            />
           </Form.Group>
           <Form.Group>
             <Form.Label>job description</Form.Label>
             <Form.Control
-              size="lg"
+              as="textarea"
+              row="8"
               type="job description"
               placeholder="job description"
+              onChange={handleChange}
             />
           </Form.Group>
 

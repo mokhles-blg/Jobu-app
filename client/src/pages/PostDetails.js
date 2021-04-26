@@ -11,10 +11,15 @@ const PostDetails = ({ match }) => {
   const user = useSelector((state) => state.userReducer.user);
   const [job, setJob] = useState();
   const [ready, setReady] = useState(false);
+  const [employer, setEmployer] = useState();
 
   useEffect(() => {
     async function fetchData() {
       const jobDetails = await axios.get(`/api/job/${match.params.id}`);
+      const employerDetails = await axios.get(
+        `/api/user/profile/${jobDetails.data.jobToGet.employerId}`
+      );
+      setEmployer(employerDetails.data.userToFind);
       setJob(jobDetails.data.jobToGet);
       setReady(true);
     }
@@ -64,7 +69,7 @@ const PostDetails = ({ match }) => {
                 <br />
                 <br />
                 <h2>
-                  <em>{job?.remuneration} DT</em>
+                  <em>{job?.salary} DT</em>
                 </h2>
                 <p>{job?.title}</p>
                 {user?.role.toLowerCase() === "job seeker" ? (
@@ -109,95 +114,41 @@ const PostDetails = ({ match }) => {
               <section className="tabs-content" style={{ width: "100%" }}>
                 <article id="tabs-1">
                   <h4>Job Description</h4>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Optio eum expedita nobis cum vitae totam voluptate
-                    temporibus nostrum, repellendus accusantium.
-                  </p>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Illo hic quis quo tempora, totam non vero velit. Inventore,
-                    obcaecati placeat perspiciatis neque enim laudantium. Sit
-                    eaque, aliquid et nisi illo.
-                  </p>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Fugit nam placeat ut cumque ipsa iste, commodi omnis aperiam
-                    perferendis incidunt. Provident doloremque, quia labore eius
-                    adipisci asperiores voluptatum nisi porro corporis ex
-                    explicabo magnam eligendi, autem quae, voluptate et
-                    molestiae?
-                  </p>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Recusandae soluta architecto modi. Et ullam ipsam, tempore
-                    sequi nesciunt dignissimos animi odio eaque illum eligendi
-                    pariatur. Porro delectus a rem rerum ex similique fugit
-                    dolorem fugiat libero sint aliquam velit, eligendi adipisci
-                    fuga assumenda, dolorum, deserunt ea inventore quis voluptas
-                    accusantium omnis iure quia temporibus. Accusamus, adipisci
-                    facere ullam ea amet.
-                  </p>
+                  <p>{job?.description}</p>
                 </article>
                 <article id="tabs-2">
                   <h4>About Employer</h4>
                   <p className="lead">
                     {" "}
-                    <i className="fa fa-map-marker" /> London{" "}
+                    <i className="fa fa-map-marker" /> {job?.location}{" "}
                   </p>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Mollitia doloremque sit, enim sint odio corporis illum
-                    perferendis, unde repellendus aut dolore doloribus minima
-                    qui ullam vel possimus magnam ipsa deleniti.
-                  </p>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Necessitatibus ducimus ab numquam magnam aliquid, odit
-                    provident consectetur corporis eius blanditiis alias nulla
-                    commodi qui voluptatibus laudantium quaerat tempore possimus
-                    esse nam sed accusantium inventore? Sapiente minima dicta
-                    sed quia sunt?
-                  </p>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Rerum qui, corrupti consequuntur. Officia consectetur error
-                    amet debitis esse minus quasi, dicta suscipit tempora,
-                    natus, vitae voluptatem quae libero. Sunt nulla culpa
-                    impedit! Aliquid cupiditate, impedit reiciendis dolores,
-                    illo adipisci, omnis dolor distinctio voluptas expedita
-                    maxime officiis maiores cumque sequi quaerat culpa
-                    blanditiis. Quia tenetur distinctio rem, quibusdam officiis
-                    voluptatum neque!
-                  </p>
+                  <p>{employer?.aboutEmployer}</p>
                 </article>
                 <article id="tabs-3">
                   <h4>Contact Details</h4>
                   <div className="row">
                     <div className="col-sm-6">
                       <label>Name</label>
-                      <p>John Smith</p>
+                      <p>{employer?.name}</p>
                     </div>
                     <div className="col-sm-6">
                       <label>Phone</label>
-                      <p>123-456-789 </p>
-                    </div>
-                    <div className="col-sm-6">
-                      <label>Mobile phone</label>
-                      <p>456789123 </p>
+                      <p> {employer?.phone ? employer.phone : "N/A"}</p>
                     </div>
                     <div className="col-sm-6">
                       <label>Email</label>
                       <p>
-                        <a href="">john@carsales.com</a>
+                        <a href="">{employer?.email}</a>
                       </p>
                     </div>
                     <div className="col-sm-6">
                       <label>Website</label>
                       <p>
-                        <a href="http://www.cannonguards.com/">
-                          http://www.cannonguards.com/
-                        </a>
+                        {employer?.website ? (
+                          <a href={employer.website}> {employer.website} </a>
+                        ) : (
+                          "N/A"
+                        )}
                       </p>
                     </div>
                   </div>

@@ -74,6 +74,15 @@ const SignUp = ({ history }) => {
                   placeholder="Phone Number"
                 />
               </Form.Group>
+              <Form.Group controlId="formBasicPhone">
+                <Form.Label>Website</Form.Label>
+                <Form.Control
+                  type="website"
+                  name="website"
+                  onChange={handleChange}
+                  placeholder="Website"
+                />
+              </Form.Group>
               <Form.Group controlId="formBasicEmail">
                 <Form.Label>Email address</Form.Label>
                 <Form.Control

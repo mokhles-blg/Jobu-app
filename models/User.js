@@ -22,6 +22,8 @@ const UserSchema = new Schema({
   address: String,
   savedJobs: Array,
   resume: String,
+  aboutEmployer: String,
+  website: String,
 });
 
 module.exports = User = model("user", UserSchema);

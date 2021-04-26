@@ -6,11 +6,11 @@ const JobSchema = new Schema({
     type: String,
     required: true,
   },
-  company: {
+  salary: {
     type: String,
     required: true,
   },
-  region: {
+  location: {
     type: String,
     required: true,
   },
@@ -18,15 +18,9 @@ const JobSchema = new Schema({
     type: String,
     required: true,
   },
-  exigence: String,
-  date: Date,
-  jobType: String,
-  experience: String,
+  category: String,
+  type: String,
   carrerLevel: String,
-  studyLevel: String,
-  remuneration: String,
-  language: String,
-  gender: String,
 });
 
 module.exports = Job = model("job", JobSchema);

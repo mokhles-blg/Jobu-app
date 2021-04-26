@@ -81,8 +81,8 @@ exports.SignIn = async (req, res) => {
 
 exports.ShowUserInfos = async (req, res) => {
   try {
-    const { _id } = req.params;
-    const userToFind = await User.findOne({ _id });
+    const id = req.params.id;
+    const userToFind = await User.findOne({ _id: id });
     console.log(userToFind);
     res.status(200).send({ msg: "I found the user ...", userToFind });
   } catch (error) {
