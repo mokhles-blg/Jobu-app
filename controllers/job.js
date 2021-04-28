@@ -11,9 +11,10 @@ exports.addJob = async (req, res) => {
       careerLevel,
       type,
       salary,
+      employerId,
     } = req.body;
     // fields required
-    if (!title || !location || !description || !salary) {
+    if (!title || !location || !description || !salary || !employerId) {
       res.status(400).send({ msg: "One required field is missing" });
       return;
     }
@@ -25,6 +26,7 @@ exports.addJob = async (req, res) => {
       careerLevel,
       type,
       salary,
+      employerId,
     });
     await newJob.save();
     res.status(200).send({ msg: "Job posted successfully", newJob });

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import {
   Tab,
   Col,
@@ -10,30 +10,37 @@ import {
   Form,
   Container,
 } from "react-bootstrap";
+
 import "../assets/css/bootstrap.min.css";
 import "../assets/css/font-awesome.css";
 import "../assets/css/style.css";
 import axios from "axios";
 import UserTable from "../Components/UserTable";
+import ReceivedApplications from "../Components/ReceivedApplications";
 import { Document, Page, pdfjs } from "react-pdf";
+// import { getApplication } from "../JS/actions/application";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 const Profile = (history) => {
   const user = useSelector((state) => state.userReducer.user);
-  const [users, setUsers] = useState([]);
+  // const application = useSelector(
+  //   (state) => state.applicationReducer.application
+  // );
   const [savedjobs, setSavedjobs] = useState([]);
   const uploadInput = useRef(null);
   const [resume, setResume] = useState({});
+  // const dispatch = useDispatch();
 
   useEffect(() => {
     async function fetchData() {
-      const res = await axios.get("/api/user/users/");
-      setUsers(res.data.listUsers);
       if (user) {
         setResume(user.resume);
         const result = await axios.get("/api/getSavedJobs", {
           params: { savedJobsIds: JSON.stringify(user?.savedJobs) },
         });
         setSavedjobs(result.data.jobsToGet);
+        // } else {
+        //   dispatch(getApplication());
+        // }
       }
     }
     fetchData();
@@ -120,7 +127,7 @@ const Profile = (history) => {
                   <Tab.Content>
                     {" "}
                     <Tab.Pane eventKey="first">
-                      <UserTable users={users} />
+                      <UserTable />
                     </Tab.Pane>
                   </Tab.Content>
                 </Col>
@@ -128,11 +135,6 @@ const Profile = (history) => {
             </Tab.Container>
           </div>
         </section>
-
-        {/* jQuery */}
-        {/* Bootstrap */}
-        {/* Plugins */}
-        {/* Global Init */}
       </div>
     );
   } else if (user?.role.toLowerCase() === "employer") {
@@ -199,18 +201,15 @@ const Profile = (history) => {
                       <h4>Phone Number: {user?.phone}</h4>
                       <h4>Address: {user?.address}</h4>
                     </Tab.Pane>
-                    <Tab.Pane eventKey="second"></Tab.Pane>
+                    <Tab.Pane eventKey="second">
+                      <ReceivedApplications />
+                    </Tab.Pane>
                   </Tab.Content>
                 </Col>
               </Row>
             </Tab.Container>
           </div>
         </section>
-
-        {/* jQuery */}
-        {/* Bootstrap */}
-        {/* Plugins */}
-        {/* Global Init */}
       </div>
     );
   } else {

@@ -10,6 +10,7 @@ const ApplicationSchema = new Schema({
     type: String,
     required: true,
   },
+  coverLetter: String,
 });
 
 module.exports = Application = model("application", ApplicationSchema);

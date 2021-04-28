@@ -1,0 +1,1 @@
+export const GET_APPLICATION = "GET_APPLICATION";

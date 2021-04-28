@@ -1,13 +1,23 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Form, Button } from "react-bootstrap";
 import { addJob } from "../JS/actions/job";
 import "../assets/css/bootstrap.min.css";
 import "../assets/css/font-awesome.css";
 import "../assets/css/style.css";
 const CreatePost = ({ history }) => {
-  const [newJob, setNewJob] = useState(null);
+  const user = useSelector((state) => state.userReducer.user);
+
+  const [newJob, setNewJob] = useState({});
+
+  // const newJob = useSelector((state) => state.jobReducer);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (user && user._id) {
+      setNewJob({ ...newJob, employerId: user._id.toString() });
+    }
+  }, [user]);
   const handleChange = (e) => {
     setNewJob({ ...newJob, [e.target.name]: e.target.value });
   };
@@ -56,7 +66,7 @@ const CreatePost = ({ history }) => {
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Job Title </Form.Label>
             <Form.Control
-              type="title"
+              name="title"
               placeholder="Enter title"
               onChange={handleChange}
             />
@@ -64,7 +74,7 @@ const CreatePost = ({ history }) => {
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Salary</Form.Label>
             <Form.Control
-              type="salary"
+              name="salary"
               placeholder="Enter salary"
               onChange={handleChange}
             />
@@ -72,7 +82,7 @@ const CreatePost = ({ history }) => {
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Location</Form.Label>
             <Form.Control
-              type="location"
+              name="location"
               placeholder="Enter location"
               onChange={handleChange}
             />
@@ -80,7 +90,7 @@ const CreatePost = ({ history }) => {
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Job Category</Form.Label>
             <Form.Control
-              type="category"
+              name="category"
               placeholder="Enter job category"
               onChange={handleChange}
             />
@@ -88,7 +98,7 @@ const CreatePost = ({ history }) => {
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Job Type</Form.Label>
             <Form.Control
-              type="type"
+              name="type"
               placeholder="Enter job type"
               onChange={handleChange}
             />
@@ -96,7 +106,7 @@ const CreatePost = ({ history }) => {
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Career Level</Form.Label>
             <Form.Control
-              type="careerLevel"
+              name="careerLevel"
               placeholder="Enter career level"
               onChange={handleChange}
             />
@@ -104,6 +114,7 @@ const CreatePost = ({ history }) => {
           <Form.Group>
             <Form.Label>job description</Form.Label>
             <Form.Control
+              name="description"
               as="textarea"
               row="8"
               type="job description"

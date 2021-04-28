@@ -16,12 +16,15 @@ const Jobs = () => {
 
   const dispatch = useDispatch();
 
-  useEffect(async () => {
-    const result = await axios.get("/api/job", {
-      params: search,
-    });
-    dispatch(jobResults(result.data.listJobs));
-  }, [dispatch, search]);
+  useEffect(() => {
+    async function fetchData() {
+      const result = await axios.get("/api/job", {
+        params: search,
+      });
+      dispatch(jobResults(result.data.listJobs));
+    }
+    fetchData();
+  }, []);
 
   const handleSaveClick = async (e) => {
     if (isAuth) {
@@ -74,10 +77,6 @@ const Jobs = () => {
                 <h2>
                   Our <em>Jobs</em>
                 </h2>
-                <p>
-                  Ut consectetur, metus sit amet aliquet placerat, enim est
-                  ultricies ligula
-                </p>
               </div>
             </div>
           </div>
@@ -197,8 +196,8 @@ const Jobs = () => {
             <div className="col-lg-8">
               <SearchingBarForJobs />
               <div className="row">
-                {listJobs?.map((job) => (
-                  <div className="col-md-6">
+                {listJobs?.map((job, index) => (
+                  <div className="col-md-6" key={index}>
                     <div className="trainer-item">
                       <div className="image-thumb">
                         <img src={j1} alt="" />
@@ -206,21 +205,21 @@ const Jobs = () => {
                       <div className="down-content">
                         <span>
                           {" "}
-                          {job.remuneration}
-                          <sup>$</sup>
+                          {job?.salary}
+                          <sup> DT</sup>
                         </span>
                         <h4>
-                          {job.title <= 40
-                            ? job.title
-                            : job.title.slice(0, 25) + "..."}
+                          {job?.title <= 40
+                            ? job?.title
+                            : job?.title.slice(0, 25) + "..."}
                         </h4>
-                        <p>{job.category}</p>
+                        <p>{job?.category}</p>
                         <ul className="social-icons">
                           <li>
-                            <a href={`/postDetails/${job._id}`}>+ View More</a>
+                            <a href={`/postDetails/${job?._id}`}>+ View More</a>
                           </li>
                           <li>
-                            <Button jobId={job._id} onClick={handleSaveClick}>
+                            <Button jobId={job?._id} onClick={handleSaveClick}>
                               <FontAwesomeIcon icon={faBookmark} />
                               &nbsp; Save
                             </Button>

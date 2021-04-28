@@ -10,7 +10,6 @@ import { Helmet } from "react-helmet";
 const PostDetails = ({ match }) => {
   const user = useSelector((state) => state.userReducer.user);
   const [job, setJob] = useState();
-  const [ready, setReady] = useState(false);
   const [employer, setEmployer] = useState();
 
   useEffect(() => {
@@ -21,12 +20,10 @@ const PostDetails = ({ match }) => {
       );
       setEmployer(employerDetails.data.userToFind);
       setJob(jobDetails.data.jobToGet);
-      setReady(true);
     }
-    if (!ready) {
-      fetchData();
-    }
-  }, [ready]);
+    fetchData();
+  }, []);
+
   return (
     <div>
       <meta charSet="utf-8" />
@@ -74,7 +71,9 @@ const PostDetails = ({ match }) => {
                 <p>{job?.title}</p>
                 {user?.role.toLowerCase() === "job seeker" ? (
                   <div className="main-button">
-                    <Button href="/applicationForm">Apply for this Job</Button>
+                    <Button href={`/applicationForm/${job?._id}`}>
+                      Apply for this Job
+                    </Button>
                   </div>
                 ) : (
                   ""

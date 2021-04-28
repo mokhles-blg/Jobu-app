@@ -18,6 +18,10 @@ const JobSchema = new Schema({
     type: String,
     required: true,
   },
+  employerId: {
+    type: String,
+    required: true,
+  },
   category: String,
   type: String,
   carrerLevel: String,

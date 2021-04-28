@@ -1,8 +1,25 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import { useSelector } from "react-redux";
-import { Form, Button } from "react-bootstrap";
-const ApplicationForm = () => {
+import { Col, Row, Button, Form, Container } from "react-bootstrap";
+import { Document, Page } from "react-pdf";
+import axios from "axios";
+const ApplicationForm = ({ match, history }) => {
   const user = useSelector((state) => state.userReducer.user);
+  const coverLetter = useRef(null);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    var application = {
+      userID: user._id.toString(),
+      jobID: match.params.id,
+      coverLetter: coverLetter.current.value,
+    };
+    const applicationResult = await axios.post(
+      "/api/application/apply",
+      application
+    );
+    history.push("/jobs");
+  };
   return (
     <div>
       <meta charSet="utf-8" />
@@ -55,36 +72,57 @@ const ApplicationForm = () => {
           <br />
           <br />
           <section className="tabs-content">
-            <Form>
+            <Form onSubmit={handleSubmit}>
               <div>
-                {" "}
-                <Form.Group controlId="formBasicEmail">
-                  <Form.Label>Name: {user?.name}</Form.Label>
-                </Form.Group>
-                <Form.Group controlId="formBasicEmail">
-                  <Form.Label>E-mail Address: {user?.email}</Form.Label>
-                </Form.Group>
-                <Form.Group controlId="formBasicEmail">
-                  <Form.Label>Phone Number:{user?.phone}</Form.Label>
-                </Form.Group>
-                <Form.Group controlId="formBasicEmail">
-                  <Form.Label>Address: {user?.address}</Form.Label>
-                </Form.Group>
+                <table>
+                  <tr>
+                    <td>
+                      <Form.Group controlId="formBasicResume">
+                        <iframe
+                          src={user?.resume}
+                          height="600px"
+                          width="400px"
+                        ></iframe>
+                      </Form.Group>
+                    </td>
+                    <td></td>{" "}
+                    <td width="300px">
+                      <Form.Group controlId="formBasicName">
+                        <Form.Label>Name: </Form.Label>
+                        <Form.Control disabled={true} value={user?.name} />
+                      </Form.Group>
+                      <Form.Group controlId="formBasicEmail">
+                        <Form.Label>E-mail Address:</Form.Label>
+                        <Form.Control disabled={true} value={user?.email} />
+                      </Form.Group>
+                      <Form.Group controlId="formBasicPhone">
+                        <Form.Label>Phone Number:</Form.Label>
+                        <Form.Control disabled={true} value={user?.phone} />
+                      </Form.Group>
+                      <Form.Group controlId="formBasicAddress">
+                        <Form.Label>Address:</Form.Label>
+                        <Form.Control disabled={true} value={user?.address} />
+                      </Form.Group>
+                      <Form.Group controlId="formBasicCoverLetter">
+                        <Form.Label>Cover Letter:</Form.Label>
+                        <Form.Control
+                          as="textarea"
+                          row="8"
+                          placeholder="Write your cover letter here..."
+                          ref={coverLetter}
+                        />
+                      </Form.Group>
+                      <Button variant="primary" type="submit">
+                        Submit
+                      </Button>
+                    </td>
+                  </tr>
+                </table>{" "}
               </div>
-              <Button variant="primary" type="submit">
-                Submit
-              </Button>
             </Form>
           </section>
         </div>
       </section>
-      {/* ***** Our Classes End ***** */}
-      {/* ***** Footer Start ***** */}
-
-      {/* jQuery */}
-      {/* Bootstrap */}
-      {/* Plugins */}
-      {/* Global Init */}
     </div>
   );
 };

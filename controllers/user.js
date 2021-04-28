@@ -125,3 +125,18 @@ exports.UploadResume = async (req, res) => {
     res.status(400).send({ msg: "Can not upload resume", error });
   }
 };
+
+exports.DeleteUser = async (req, res) => {
+  const { userId } = req.params;
+  try {
+    const userToDelete = await User.findOneAndRemove({ _id: userId });
+    // console.log(contactToDelete)
+    if (!userToDelete) {
+      res.status(200).send({ msg: "User already deleted ..." });
+      return;
+    }
+    res.status(200).send({ msg: "User deleted ...", userToDelete });
+  } catch (error) {
+    res.status(400).send({ msg: "Can not delete user with this id !!", error });
+  }
+};

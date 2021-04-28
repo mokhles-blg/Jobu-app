@@ -7,6 +7,7 @@ const {
   ShowAllUsers,
   SaveJob,
   UploadResume,
+  DeleteUser,
 } = require("../controllers/user");
 const isAuth = require("../middlewares/auth_jwt");
 
@@ -25,5 +26,5 @@ router.get("/profile/:id", ShowUserInfos);
 router.get("/users", ShowAllUsers);
 router.put("/saveJob", SaveJob);
 router.post("/uploadResume", UploadResume);
-
+router.delete("/deleteUser/:userId", DeleteUser);
 module.exports = router;

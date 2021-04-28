@@ -22,7 +22,6 @@ const jobReducer = (state = initialState, { type, payload }) => {
     case LOAD_JOB:
       return { ...state, loadJob: true };
     case ADD_JOB:
-      localStorage.setItem("token", payload.token);
       return {
         ...state,
         loadJob: false,
