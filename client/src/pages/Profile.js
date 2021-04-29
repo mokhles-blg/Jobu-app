@@ -271,10 +271,7 @@ const Profile = (history) => {
                       <Nav.Link eventKey="second">Import Resume</Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                      <Nav.Link eventKey="third">My Applications</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                      <Nav.Link eventKey="fourth">Saved Jobs</Nav.Link>
+                      <Nav.Link eventKey="third">Saved Jobs</Nav.Link>
                     </Nav.Item>
                   </Nav>
                 </Col>
@@ -310,8 +307,7 @@ const Profile = (history) => {
                         </Document>
                       </Container>
                     </Tab.Pane>
-                    <Tab.Pane eventKey="third"></Tab.Pane>
-                    <Tab.Pane eventKey="fourth">
+                    <Tab.Pane eventKey="third">
                       {savedjobs &&
                         savedjobs.length > 0 &&
                         savedjobs.map((job, index) => (
