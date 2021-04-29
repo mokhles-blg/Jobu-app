@@ -45,7 +45,7 @@ const NavbarX = () => {
             <div className="col-12">
               <nav className="main-nav">
                 {/* ***** Logo Start ***** */}
-                <a href="index.html" className="logo">
+                <a href="" className="logo">
                   JOB<em>U</em>
                 </a>
                 {/* ***** Logo End ***** */}
