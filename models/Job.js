@@ -24,7 +24,7 @@ const JobSchema = new Schema({
   },
   category: String,
   type: String,
-  carrerLevel: String,
+  careerLevel: String,
 });
 
 module.exports = Job = model("job", JobSchema);

@@ -1,5 +1,12 @@
-import React, { useEffect } from "react";
-import j1 from "../assets/images/product-1-720x480.jpg";
+import React, { useEffect, useState } from "react";
+
+import servicesImage from "../assets/images/1.jpg";
+import industrialImage from "../assets/images/2.jpg";
+import callCenterImage from "../assets/images/3.jpg";
+import computerScienceImage from "../assets/images/4.jpg";
+import financialImage from "../assets/images/5.jpg";
+import othersImage from "../assets/images/6.jpg";
+
 import SearchingBarForJobs from "../Components/SearchingBarForJobs";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
@@ -7,6 +14,7 @@ import { jobResults } from "../JS/actions/job";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBookmark } from "@fortawesome/free-solid-svg-icons";
 import { Button } from "react-bootstrap";
+import { searchJobs, deleteFromFilter } from "../JS/actions/job";
 
 const Jobs = () => {
   const search = useSelector((state) => state.jobReducer.search);
@@ -24,7 +32,16 @@ const Jobs = () => {
       dispatch(jobResults(result.data.listJobs));
     }
     fetchData();
-  }, []);
+  }, [search]);
+
+  const handleFilterChange = (e) => {
+    dispatch(
+      searchJobs({
+        ...search,
+        [e.target.name]: e.target.value,
+      })
+    );
+  };
 
   const handleSaveClick = async (e) => {
     if (isAuth) {
@@ -91,105 +108,197 @@ const Jobs = () => {
           <div className="row">
             <div className="col-lg-4">
               <form action="#">
-                <h5 style={{ marginBottom: "15px" }}>Type</h5>
+                <h5 name="type" style={{ marginBottom: "15px" }}>
+                  Contract types
+                </h5>
                 <div>
                   <label>
-                    <input type="checkbox" />
-                    <span>Contract (5)</span>
+                    <input
+                      type="radio"
+                      name="type"
+                      onChange={handleFilterChange}
+                      value="All"
+                      defaultChecked={true}
+                    />
+                    <span>All </span>
                   </label>
                 </div>
                 <div>
                   <label>
-                    <input type="checkbox" />
-                    <span>Full time (5)</span>
+                    <input
+                      type="radio"
+                      name="type"
+                      onChange={handleFilterChange}
+                      value="Contract"
+                    />
+                    <span>Contract </span>
                   </label>
                 </div>
                 <div>
                   <label>
-                    <input type="checkbox" />
-                    <span>Internship (5)</span>
-                  </label>
-                </div>
-                <br />
-                <h5 style={{ marginBottom: "15px" }}>Category</h5>
-                <div>
-                  <label>
-                    <input type="checkbox" />
-                    <span>Accounting / Finance / Insurance Jobs (5)</span>
+                    <input
+                      type="radio"
+                      name="type"
+                      onChange={handleFilterChange}
+                      value="Full time"
+                    />
+                    <span>Full time </span>
                   </label>
                 </div>
                 <div>
                   <label>
-                    <input type="checkbox" />
-                    <span>Accounting / Finance / Insurance Jobs (5)</span>
-                  </label>
-                </div>
-                <div>
-                  <label>
-                    <input type="checkbox" />
-                    <span>Accounting / Finance / Insurance Jobs (5)</span>
-                  </label>
-                </div>
-                <br />
-                <h5 style={{ marginBottom: "15px" }}>Career levels</h5>
-                <div>
-                  <label>
-                    <input type="checkbox" />
-                    <span>Entry Level (5)</span>
-                  </label>
-                </div>
-                <div>
-                  <label>
-                    <input type="checkbox" />
-                    <span>Entry Level (5)</span>
-                  </label>
-                </div>
-                <div>
-                  <label>
-                    <input type="checkbox" />
-                    <span>Entry Level (5)</span>
+                    <input
+                      type="radio"
+                      name="type"
+                      onClick={handleFilterChange}
+                      value="Internship"
+                    />
+                    <span>Internship </span>
                   </label>
                 </div>
                 <br />
-                <h5 style={{ marginBottom: "15px" }}>Education levels</h5>
+                <h5 name="category" style={{ marginBottom: "15px" }}>
+                  Job categories
+                </h5>
                 <div>
                   <label>
-                    <input type="checkbox" />
-                    <span>Associate Degree (5)</span>
+                    <input
+                      type="radio"
+                      name="category"
+                      onChange={handleFilterChange}
+                      value="All"
+                      defaultChecked={true}
+                    />
+                    <span>All </span>
                   </label>
                 </div>
                 <div>
                   <label>
-                    <input type="checkbox" />
-                    <span>Associate Degree (5)</span>
+                    <input
+                      type="radio"
+                      name="category"
+                      onClick={handleFilterChange}
+                      value="Accounting, Finance and Marketing"
+                    />
+                    <span>Accounting, Finance and Marketing </span>
                   </label>
                 </div>
                 <div>
                   <label>
-                    <input type="checkbox" />
-                    <span>Associate Degree (5)</span>
+                    <input
+                      type="radio"
+                      name="category"
+                      onClick={handleFilterChange}
+                      value="Computer sciences and Networking"
+                    />
+                    <span>Computer sciences and Networking</span>
+                  </label>
+                </div>
+                <div>
+                  <label>
+                    <input
+                      type="radio"
+                      name="category"
+                      onClick={handleFilterChange}
+                      value="Call center"
+                    />
+                    <span>Call center</span>
+                  </label>
+                </div>
+                <div>
+                  <label>
+                    <input
+                      type="radio"
+                      name="category"
+                      onClick={handleFilterChange}
+                      value="Industrial engineering"
+                    />
+                    <span>Industrial engineering</span>
+                  </label>
+                </div>
+                <div>
+                  <label>
+                    <input
+                      type="radio"
+                      name="category"
+                      onClick={handleFilterChange}
+                      value="Services sector"
+                    />
+                    <span>Services sector </span>
+                  </label>
+                </div>
+                <div>
+                  <label>
+                    <input
+                      type="radio"
+                      name="category"
+                      onClick={handleFilterChange}
+                      value="Others"
+                    />
+                    <span>Others </span>
                   </label>
                 </div>
                 <br />
-                <h5 style={{ marginBottom: "15px" }}>Years of experience</h5>
+                <h5 name="careerLevel" style={{ marginBottom: "15px" }}>
+                  Career levels
+                </h5>
                 <div>
                   <label>
-                    <input type="checkbox" />
-                    <span>&lt; 1 (5)</span>
+                    <input
+                      type="radio"
+                      name="careerLevel"
+                      onChange={handleFilterChange}
+                      value="All"
+                      defaultChecked={true}
+                    />
+                    <span>All </span>
                   </label>
                 </div>
                 <div>
                   <label>
-                    <input type="checkbox" />
-                    <span>&lt; 1 (5)</span>
+                    <input
+                      type="radio"
+                      name="careerLevel"
+                      onClick={handleFilterChange}
+                      value="Entry-Level"
+                    />
+                    <span>Entry-Level </span>
                   </label>
                 </div>
                 <div>
                   <label>
-                    <input type="checkbox" />
-                    <span>&lt; 1 (5)</span>
+                    <input
+                      type="radio"
+                      name="careerLevel"
+                      onClick={handleFilterChange}
+                      value="Intermediate"
+                    />
+                    <span>Intermediate </span>
                   </label>
                 </div>
+                <div>
+                  <label>
+                    <input
+                      type="radio"
+                      name="careerLevel"
+                      onClick={handleFilterChange}
+                      value="Mid-Level"
+                    />
+                    <span>Mid-Level </span>
+                  </label>
+                </div>
+                <div>
+                  <label>
+                    <input
+                      type="radio"
+                      name="careerLevel"
+                      onClick={handleFilterChange}
+                      value="Senior or executive-level"
+                    />
+                    <span>Senior or executive-level </span>
+                  </label>
+                </div>
+                <br />
               </form>
               <br />
             </div>
@@ -200,7 +309,7 @@ const Jobs = () => {
                   <div className="col-md-6" key={index}>
                     <div className="trainer-item">
                       <div className="image-thumb">
-                        <img src={j1} alt="" />
+                        {getImageByCategory(job.category)}
                       </div>
                       <div className="down-content">
                         <span>
@@ -269,6 +378,23 @@ const Jobs = () => {
       {/* ***** Fleet Ends ***** */}
     </div>
   );
+};
+
+const getImageByCategory = (x) => {
+  switch (x) {
+    case "Accounting, Finance and Marketing":
+      return <img src={financialImage} alt="" />;
+    case "Computer sciences and Networking":
+      return <img src={computerScienceImage} alt="" />;
+    case "Call center":
+      return <img src={callCenterImage} alt="" />;
+    case "Industrial engineering":
+      return <img src={industrialImage} alt="" />;
+    case "Services sector":
+      return <img src={servicesImage} alt="" />;
+    default:
+      return <img src={othersImage} alt="" />;
+  }
 };
 
 export default Jobs;

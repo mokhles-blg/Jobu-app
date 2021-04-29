@@ -14,6 +14,7 @@ const UserTable = () => {
     async function fetchData() {
       const res = await axios.get("/api/user/users/");
       setUsers(res.data.listUsers);
+      setHasChanged(false);
     }
     fetchData();
   }, [hasChanged]);
@@ -64,7 +65,7 @@ const UserTable = () => {
           <Modal.Title>ATTENTION !</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          You're about to delete a user, this action is irreversible. Are you
+          You're about to delete this user, this action is irreversible. Are you
           sure?
         </Modal.Body>
         <Modal.Footer>

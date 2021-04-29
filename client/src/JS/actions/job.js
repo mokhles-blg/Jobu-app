@@ -14,6 +14,13 @@ export const searchJobs = (filter) => {
   };
 };
 
+export const deleteFromFilter = (key) => {
+  return {
+    type: "DELETE_JOBS_FILTER",
+    payload: key,
+  };
+};
+
 export const jobResults = (listJobs) => {
   return {
     type: "SET_JOB_RESULTS",

@@ -17,7 +17,7 @@ const SearchingBarForJobs = () => {
   };
 
   return (
-    <Form inline>
+    <Form inline onSubmit={onSearchClick}>
       <Form.Label htmlFor="inlineFormInputName2" srOnly>
         Keyword
       </Form.Label>
@@ -47,7 +47,6 @@ const SearchingBarForJobs = () => {
         style={{ width: "100px", height: "50px" }}
         type="submit"
         className="mb-2"
-        onClick={onSearchClick}
       >
         Search
       </Button>

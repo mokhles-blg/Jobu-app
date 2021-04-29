@@ -96,7 +96,7 @@ const CreatePost = ({ history }) => {
             />
           </Form.Group>
           <Form.Group controlId="formBasicEmail">
-            <Form.Label>Job Type</Form.Label>
+            <Form.Label>Contract Type</Form.Label>
             <Form.Control
               name="type"
               placeholder="Enter job type"
@@ -112,7 +112,7 @@ const CreatePost = ({ history }) => {
             />
           </Form.Group>
           <Form.Group>
-            <Form.Label>job description</Form.Label>
+            <Form.Label>Job Description</Form.Label>
             <Form.Control
               name="description"
               as="textarea"

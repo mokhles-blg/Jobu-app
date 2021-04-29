@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import {
   Tab,
   Col,
@@ -17,6 +17,8 @@ import "../assets/css/style.css";
 import axios from "axios";
 import UserTable from "../Components/UserTable";
 import ReceivedApplications from "../Components/ReceivedApplications";
+import MyPosts from "../Components/MyPosts";
+
 import { Document, Page, pdfjs } from "react-pdf";
 // import { getApplication } from "../JS/actions/application";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
@@ -203,6 +205,9 @@ const Profile = (history) => {
                     </Tab.Pane>
                     <Tab.Pane eventKey="second">
                       <ReceivedApplications />
+                    </Tab.Pane>
+                    <Tab.Pane eventKey="third">
+                      <MyPosts />
                     </Tab.Pane>
                   </Tab.Content>
                 </Col>

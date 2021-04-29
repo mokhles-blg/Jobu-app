@@ -2,9 +2,11 @@ const express = require("express");
 const {
   addJob,
   deleteJob,
-  updateJob,
+  editJob,
   getListJobs,
   getJob,
+  getJobsByEmployerId,
+  // getJobsByEmployerId,
 } = require("../controllers/job");
 const router = express.Router();
 
@@ -15,12 +17,14 @@ router.get("/test", (req, res) => {
 
 router.post("/addJob", addJob);
 
-router.delete("/:id", deleteJob);
+router.delete("/deleteJob/:jobId", deleteJob);
 
-router.put("/:id", updateJob);
+router.put("/editJob/:_id", editJob);
 
 router.get("/", getListJobs);
 
 router.get("/:id", getJob);
+
+router.get("/myPosts/:id", getJobsByEmployerId);
 
 module.exports = router;
