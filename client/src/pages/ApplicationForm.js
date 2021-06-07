@@ -1,8 +1,13 @@
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
+// useState
 import { useSelector } from "react-redux";
-import { Col, Row, Button, Form, Container } from "react-bootstrap";
-import { Document, Page } from "react-pdf";
+import { Button, Form } from "react-bootstrap";
+// Col, Row,Container
+// import { Document, Page } from "react-pdf";
 import axios from "axios";
+
+import bannerImage from "../assets/images/banner-image-1-1920x500.jpg";
+
 const ApplicationForm = ({ match, history }) => {
   const user = useSelector((state) => state.userReducer.user);
   const coverLetter = useRef(null);
@@ -50,7 +55,7 @@ const ApplicationForm = ({ match, history }) => {
         className="section section-bg"
         id="call-to-action"
         style={{
-          backgroundImage: "url(assets/images/banner-image-1-1920x500.jpg)",
+          backgroundImage: `url(${bannerImage}`,
         }}
       >
         <div className="container">
@@ -59,7 +64,9 @@ const ApplicationForm = ({ match, history }) => {
               <div className="cta-content">
                 <br />
                 <br />
-                <h2>Apply here</h2>
+                <h2>
+                  <em>Apply</em> here
+                </h2>
               </div>
             </div>
           </div>
@@ -79,6 +86,7 @@ const ApplicationForm = ({ match, history }) => {
                     <td>
                       <Form.Group controlId="formBasicResume">
                         <iframe
+                          title="userresume"
                           src={user?.resume}
                           height="600px"
                           width="400px"

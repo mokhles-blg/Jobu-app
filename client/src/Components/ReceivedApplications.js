@@ -82,7 +82,12 @@ const ReceivedApplications = () => {
           <Modal.Title>RESUME</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <iframe src={currentResume} height="600px" width="400px"></iframe>
+          <iframe
+            title="resume"
+            src={currentResume}
+            height="600px"
+            width="400px"
+          ></iframe>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCloseResume}>

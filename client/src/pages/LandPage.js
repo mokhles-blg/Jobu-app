@@ -1,10 +1,12 @@
 import React from "react";
+import { Col, Row } from "react-bootstrap";
 import SearchingBar from "../Components/SearchingBar";
 import "../assets/css/bootstrap.min.css";
 import "../assets/css/font-awesome.css";
 import "../assets/css/style.css";
 import v1 from "../assets/images/video.mp4";
 import b1 from "../assets/images/about-fullscreen-1-1920x700.jpg";
+import lineDec from "../assets/images/line-dec.png";
 const Landpage = () => {
   return (
     <>
@@ -43,47 +45,70 @@ const Landpage = () => {
         <section
           className="section section-bg"
           id="schedule"
-          style={{
-            backgroundImage:
-              "url(assets/images/about-fullscreen-1-1920x700.jpg)",
-          }}
+          // style={{
+          //   backgroundImage: `url(${b1}`,
+          // }}
         >
           <div className="container">
-            <div className="row">
-              <div className="col-lg-6 offset-lg-3">
-                <div className="section-heading dark-bg">
+            <Row>
+              <Col sm={6}>
+                <div className="cta-content">
+                  <br />
+                  <br />
+                  <br />
+                  <br />
+                  <br />
+                  <br />
+                  <br />
+                  <br />
+                  <br />
+                  <br />
+                  <br />
+                  <br />
+                  <br />
                   <h2>
                     Read <em>About Us</em>
                   </h2>
-                  <img src="assets/images/line-dec.png" alt="" />
-                  <p>
-                    Nunc urna sem, laoreet ut metus id, aliquet consequat magna.
-                    Sed viverra ipsum dolor, ultricies fermentum massa consequat
-                    eu.
+                  <img src={lineDec} alt="lineDec" />
+                </div>
+              </Col>
+              <Col sm={6}>
+                <div className="cta-content text-center aboutustext">
+                  <br />
+                  <br />
+                  <br />
+                  <br />
+                  <br />
+                  <p style={{ textAlign: "justify" }}>
+                    Jobu is a search engine for jobs in the Tunisia. Basically
+                    that sums up what we are. But unlike traditional job boards,
+                    users can search through thousands of career opportunities,
+                    all sourced from many job sites from around Tunisia. We
+                    understand that finding a job can be quite frustrating, so
+                    we aim to make the website as simple and as intuitive as
+                    possible. We’re working hard to ensure that you can find
+                    your dream job using our service. If you have any questions,
+                    please don’t hesitate to send us your comments or new
+                    feature requests. We’ll try to reply as soon as possible.
+                    After all, you are the reason why we build this website. If
+                    you’re looking for advice on searching for jobs on Jobu,
+                    please see some basic tips here.
+                  </p>
+                  <p style={{ textAlign: "justify" }}>
+                    Lorem Ipsum is simply dummy text of the printing and
+                    typesetting industry. Lorem Ipsum has been the industry's
+                    standard dummy text ever since the 1500s, when an unknown
+                    printer took a galley of type and scrambled it to make a
+                    type specimen book. It has survived not only five centuries,
+                    but also the leap into electronic typesetting, remaining
+                    essentially unchanged. It was popularised in the 1960s with
+                    the release of Letraset sheets containing Lorem Ipsum
+                    passages, and more recently with desktop publishing software
+                    like Aldus PageMaker including versions of Lorem Ipsum.
                   </p>
                 </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-lg-12">
-                <div className="cta-content text-center">
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Labore deleniti voluptas enim! Provident consectetur id
-                    earum ducimus facilis, aspernatur hic, alias, harum rerum
-                    velit voluptas, voluptate enim! Eos, sunt, quidem.
-                  </p>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Iusto nulla quo cum officia laboriosam. Amet tempore,
-                    aliquid quia eius commodi, doloremque omnis delectus
-                    laudantium dolor reiciendis non nulla! Doloremque maxime quo
-                    eum in culpa mollitia similique eius doloribus voluptatem
-                    facilis! Voluptatibus, eligendi, illum. Distinctio, non!
-                  </p>
-                </div>
-              </div>
-            </div>
+              </Col>
+            </Row>
           </div>
         </section>
 
@@ -91,7 +116,9 @@ const Landpage = () => {
         <section
           className="section section-bg"
           id="call-to-action"
-          backgroundImage={b1}
+          // style={{
+          //   backgroundImage: `url(${b1}`,
+          // }}
         >
           <div className="container">
             <div className="row">
@@ -101,9 +128,8 @@ const Landpage = () => {
                     Send us a <em>message</em>
                   </h2>
                   <p>
-                    Ut consectetur, metus sit amet aliquet placerat, enim est
-                    ultricies ligula, sit amet dapibus odio augue eget libero.
-                    Morbi tempus mauris a nisi luctus imperdiet.
+                    Get in touch with the right people at Jobu. Email a member
+                    of our team and we will get back to you shortly.
                   </p>
                   <div className="main-button">
                     <a href="contact.html">Contact us</a>

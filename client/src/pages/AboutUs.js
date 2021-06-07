@@ -1,5 +1,10 @@
 import React from "react";
 
+import bannerImage from "../assets/images/banner-image-1-1920x500.jpg";
+import aboutImageOurGoal from "../assets/images/about-image-1-940x460.jpg";
+import aboutImageOurWork from "../assets/images/about-image-2-940x460.jpg";
+import aboutImageOurPassion from "../assets/images/about-image-3-940x460.jpg";
+
 const AboutUs = () => {
   return (
     <div>
@@ -31,7 +36,7 @@ const AboutUs = () => {
         className="section section-bg"
         id="call-to-action"
         style={{
-          backgroundImage: "url(assets/images/banner-image-1-1920x500.jpg)",
+          backgroundImage: `url(${bannerImage}`,
         }}
       >
         <div className="container">
@@ -44,8 +49,8 @@ const AboutUs = () => {
                   Learn more <em>About Us</em>
                 </h2>
                 <p>
-                  Ut consectetur, metus sit amet aliquet placerat, enim est
-                  ultricies ligula
+                  Jobu is a search engine for jobs in the Tunisia. Basically
+                  that sums up what we are...
                 </p>
               </div>
             </div>
@@ -81,11 +86,13 @@ const AboutUs = () => {
             <div className="col-lg-8">
               <section className="tabs-content">
                 <article id="tabs-1">
-                  <img src="assets/images/about-image-1-940x460.jpg" alt="" />
+                  <img src={aboutImageOurGoal} alt="aboutImageOurGoal" />
                   <h4>Our Goals</h4>
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Vel aspernatur natus dignissimos eos quod, odio.
+                    We understand that finding a job can be quite frustrating,
+                    so we aim to make the website as simple and as intuitive as
+                    possible. We’re working hard to ensure that you can find
+                    your dream job using our service.
                   </p>
                   <p>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad
@@ -110,7 +117,7 @@ const AboutUs = () => {
                   </p>
                 </article>
                 <article id="tabs-2">
-                  <img src="assets/images/about-image-2-940x460.jpg" alt="" />
+                  <img src={aboutImageOurWork} alt="aboutImageOurWork" />
                   <h4>Our Work</h4>
                   <p>
                     Integer dapibus, est vel dapibus mattis, sem mauris luctus
@@ -137,7 +144,7 @@ const AboutUs = () => {
                   </p>
                 </article>
                 <article id="tabs-3">
-                  <img src="assets/images/about-image-3-940x460.jpg" alt="" />
+                  <img src={aboutImageOurPassion} alt="aboutImageOurPassion" />
                   <h4>Our Passion</h4>
                   <p>
                     Fusce laoreet malesuada rhoncus. Donec ultricies diam
@@ -171,7 +178,7 @@ const AboutUs = () => {
         className="section section-bg"
         id="call-to-action"
         style={{
-          backgroundImage: "url(assets/images/banner-image-1-1920x500.jpg)",
+          backgroundImage: `url(${bannerImage}`,
         }}
       >
         <div className="container">
@@ -182,9 +189,8 @@ const AboutUs = () => {
                   Send us a <em>message</em>
                 </h2>
                 <p>
-                  Ut consectetur, metus sit amet aliquet placerat, enim est
-                  ultricies ligula, sit amet dapibus odio augue eget libero.
-                  Morbi tempus mauris a nisi luctus imperdiet.
+                  Get in touch with the right people at Jobu. Email a member of
+                  our team and we will get back to you shortly.
                 </p>
                 <div className="main-button">
                   <a href="contact.html">Contact us</a>

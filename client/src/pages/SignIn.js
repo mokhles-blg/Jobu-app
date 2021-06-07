@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Form, Button, Container } from "react-bootstrap";
+import Errors from "../Components/Errors";
 import { login, videErrors } from "../JS/actions/user";
 import "../assets/css/bootstrap.min.css";
 import "../assets/css/font-awesome.css";
@@ -9,6 +10,7 @@ import v1 from "../assets/images/video.mp4";
 
 const SignIn = ({ history }) => {
   const [user, setuser] = useState({});
+  const errors = useSelector((state) => state.userReducer.errors);
   const dispatch = useDispatch();
   const handleChange = (e) => {
     setuser({ ...user, [e.target.name]: e.target.value });
@@ -35,11 +37,11 @@ const SignIn = ({ history }) => {
                 dispatch(login(user, history));
               }}
             >
-              {/* errors && errors.length > 0
+              {errors && errors.length > 0
                 ? errors.map((el, index) => <Errors key={index} error={el} />)
-              : null */}
+                : null}
               <Form.Group controlId="formBasicEmail">
-                <Form.Label>Email address</Form.Label>
+                <Form.Label className="formtitle">Email address</Form.Label>
                 <Form.Control
                   type="email"
                   name="email"
@@ -52,7 +54,7 @@ const SignIn = ({ history }) => {
               </Form.Group>
 
               <Form.Group controlId="formBasicPassword">
-                <Form.Label>Password</Form.Label>
+                <Form.Label className="formtitle">Password</Form.Label>
                 <Form.Control
                   type="password"
                   name="password"

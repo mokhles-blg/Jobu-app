@@ -27,7 +27,7 @@ const SearchingBar = () => {
         style={{ width: "300px", height: "50px" }}
         className="mb-2 mr-sm-2"
         id="inlineFormInputName2"
-        placeholder="Keyword"
+        placeholder="Job, company, skill..."
         onChange={handleChange}
         name="keyword"
       />
@@ -38,7 +38,7 @@ const SearchingBar = () => {
         <FormControl
           style={{ width: "300px", height: "50px" }}
           id="inlineFormInputGroupUsername2"
-          placeholder="Location"
+          placeholder="City, district, state..."
           onChange={handleChange}
           name="location"
         />

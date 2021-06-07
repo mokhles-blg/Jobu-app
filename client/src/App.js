@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Switch, Route } from "react-router";
 import { useDispatch } from "react-redux";
-//import Errors from "./pages/Errors";
+import Errors from "./pages/Errors";
 import LandPage from "./pages/LandPage";
 import AboutUs from "./pages/AboutUs";
 import Profile from "./pages/Profile";
@@ -36,9 +36,7 @@ function App() {
         <PrivateRoute path="/profile" component={Profile} />
         <Route path="/applicationForm/:id" component={ApplicationForm} />
         <Route path="/createPost" component={CreatePost} />
-        {/*
-       <Route path="/*" component={Errors} />
-        */}
+        <Route path="/*" component={Errors} />
       </Switch>
       <Footer />
     </div>

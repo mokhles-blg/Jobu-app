@@ -32,7 +32,7 @@ const NavbarX = () => {
 
   const logoutAndRedirect = (e) => {
     e.preventDefault();
-    history.push("/");
+    history.push("/signin");
     dispatch(logout());
   };
 
@@ -45,7 +45,7 @@ const NavbarX = () => {
             <div className="col-12">
               <nav className="main-nav">
                 {/* ***** Logo Start ***** */}
-                <a href="" className="logo">
+                <a href="/" className="logo">
                   JOB<em>U</em>
                 </a>
                 {/* ***** Logo End ***** */}
@@ -54,7 +54,6 @@ const NavbarX = () => {
                   <ul className="nav">
                     <li>
                       <a href="/" className="active">
-                        {" "}
                         Home
                       </a>
                     </li>
@@ -76,7 +75,9 @@ const NavbarX = () => {
                       ""
                     )}
                     <li>
-                      <a onClick={logoutAndRedirect}>Logout</a>
+                      <a href="/signin" onClick={logoutAndRedirect}>
+                        Logout
+                      </a>
                     </li>
                   </ul>
                 ) : (

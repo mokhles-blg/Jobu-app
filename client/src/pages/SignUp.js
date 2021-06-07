@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Form, Button, Container } from "react-bootstrap";
+import { Form, Button, Container, Col } from "react-bootstrap";
 import Errors from "../Components/Errors";
 import { register, videErrors } from "../JS/actions/user";
 import "../assets/css/bootstrap.min.css";
@@ -30,7 +30,7 @@ const SignUp = ({ history }) => {
           <h2>
             Find the perfect <em>Job</em>
           </h2>
-          <Container style={{ width: "300px" }}>
+          <Container style={{ width: "400px" }}>
             <Form
               onSubmit={(event) => {
                 event.preventDefault();
@@ -40,24 +40,29 @@ const SignUp = ({ history }) => {
               {errors.length > 0
                 ? errors.map((el) => <Errors error={el} />)
                 : null}
-              <Form.Group controlId="exampleForm.ControlSelect1">
-                <Form.Label>Which one is you?</Form.Label>
-                <Form.Control as="select" name="role" onChange={handleChange}>
-                  <option>Job Seeker</option>
-                  <option>Employer</option>
-                </Form.Control>
-              </Form.Group>
-              <Form.Group controlId="formBasicName">
-                <Form.Label>Name</Form.Label>
-                <Form.Control
-                  type="name"
-                  name="name"
-                  onChange={handleChange}
-                  placeholder="Name"
-                />
-              </Form.Group>
+              <Form.Row>
+                <Form.Group as={Col} controlId="exampleForm.ControlSelect1">
+                  <Form.Label className="formtitle">
+                    What is your role?
+                  </Form.Label>
+                  <Form.Control as="select" name="role" onChange={handleChange}>
+                    <option>Job Seeker</option>
+                    <option>Employer</option>
+                  </Form.Control>
+                </Form.Group>
+                <Form.Group as={Col} controlId="formBasicName">
+                  <Form.Label className="formtitle">Name</Form.Label>
+                  <Form.Control
+                    type="name"
+                    name="name"
+                    onChange={handleChange}
+                    placeholder="Name"
+                  />
+                </Form.Group>
+              </Form.Row>
+
               <Form.Group controlId="formBasicAddress">
-                <Form.Label>Address</Form.Label>
+                <Form.Label className="formtitle">Address</Form.Label>
                 <Form.Control
                   type="address"
                   name="address"
@@ -65,45 +70,51 @@ const SignUp = ({ history }) => {
                   placeholder="Adress"
                 />
               </Form.Group>
-              <Form.Group controlId="formBasicPhone">
-                <Form.Label>Phone Number</Form.Label>
-                <Form.Control
-                  type="phone"
-                  name="phone"
-                  onChange={handleChange}
-                  placeholder="Phone Number"
-                />
-              </Form.Group>
-              <Form.Group controlId="formBasicPhone">
-                <Form.Label>Website</Form.Label>
-                <Form.Control
-                  type="website"
-                  name="website"
-                  onChange={handleChange}
-                  placeholder="Website"
-                />
-              </Form.Group>
-              <Form.Group controlId="formBasicEmail">
-                <Form.Label>Email address</Form.Label>
-                <Form.Control
-                  type="email"
-                  name="email"
-                  onChange={handleChange}
-                  placeholder="Enter email"
-                />
-                <Form.Text className="text-muted">
-                  We'll never share your email with anyone else.
-                </Form.Text>
-              </Form.Group>
-              <Form.Group controlId="formBasicPassword">
-                <Form.Label>Password</Form.Label>
-                <Form.Control
-                  type="password"
-                  name="password"
-                  onChange={handleChange}
-                  placeholder="Password"
-                />
-              </Form.Group>
+
+              <Form.Row>
+                <Form.Group as={Col} controlId="formBasicPhone">
+                  <Form.Label className="formtitle">Phone Number</Form.Label>
+                  <Form.Control
+                    type="phone"
+                    name="phone"
+                    onChange={handleChange}
+                    placeholder="Phone Number"
+                  />
+                </Form.Group>
+
+                <Form.Group as={Col} controlId="formBasicPhone">
+                  <Form.Label className="formtitle">Website</Form.Label>
+                  <Form.Control
+                    type="website"
+                    name="website"
+                    onChange={handleChange}
+                    placeholder="Website"
+                  />
+                </Form.Group>
+              </Form.Row>
+              <Form.Row>
+                <Form.Group as={Col} controlId="formBasicEmail">
+                  <Form.Label className="formtitle">Email address</Form.Label>
+                  <Form.Control
+                    type="email"
+                    name="email"
+                    onChange={handleChange}
+                    placeholder="Enter email"
+                  />
+                  <Form.Text className="text-muted">
+                    We'll never share your email with anyone else.
+                  </Form.Text>
+                </Form.Group>
+                <Form.Group as={Col} controlId="formBasicPassword">
+                  <Form.Label className="formtitle">Password</Form.Label>
+                  <Form.Control
+                    type="password"
+                    name="password"
+                    onChange={handleChange}
+                    placeholder="Password"
+                  />
+                </Form.Group>
+              </Form.Row>
               <Button variant="primary" type="submit">
                 Sign up
               </Button>

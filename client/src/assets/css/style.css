@@ -228,6 +228,12 @@ body {
   background-color: #f9735b;
   color: #fff;
 }
+.landpageaboutus {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+/* landpage about us layout */
 
 /* 
 ---------------------------------------------
@@ -661,6 +667,7 @@ features
 */
 
 #features {
+  margin-top: 40px;
   margin-bottom: 80px;
 }
 
@@ -1009,7 +1016,12 @@ ul.social-icons li a {
 ul.social-icons li a:hover {
   color: #ed563b;
 }
-
+.radiofilter {
+  display: flex;
+}
+.filtertitle {
+  display: flex;
+}
 /* 
 ---------------------------------------------
 contact
@@ -1286,8 +1298,8 @@ responsive
 }
 
 .btn-primary {
-  border-color: #ed563b;
-  background-color: #ed563b;
+  border-color: #ed563b !important;
+  background-color: #ed563b !important;
 }
 
 .btn-primary:not(:disabled):not(.disabled).active,
@@ -1322,4 +1334,20 @@ a {
 a:focus,
 a:hover {
   color: #f9735b;
+}
+.formtitle {
+  color: #fff;
+}
+.formcontainer {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+.nav.nav-pills .nav-link.active {
+  background-color: #ed563b;
+}
+.aboutustext {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }

@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+// useState
 
+import bannerImage from "../assets/images/banner-image-1-1920x500.jpg";
 import servicesImage from "../assets/images/1.jpg";
 import industrialImage from "../assets/images/2.jpg";
 import callCenterImage from "../assets/images/3.jpg";
@@ -82,7 +84,7 @@ const Jobs = () => {
         className="section section-bg"
         id="call-to-action"
         style={{
-          backgroundImage: "url(assets/images/banner-image-1-1920x500.jpg)",
+          backgroundImage: `url(${bannerImage}`,
         }}
       >
         <div className="container">
@@ -92,7 +94,7 @@ const Jobs = () => {
                 <br />
                 <br />
                 <h2>
-                  Our <em>Jobs</em>
+                  Here are our <em>Jobs</em>
                 </h2>
               </div>
             </div>
@@ -106,12 +108,15 @@ const Jobs = () => {
           <br />
           <br />
           <div className="row">
-            <div className="col-lg-4">
+            <div className="col-lg-4 filtertitle">
               <form action="#">
-                <h5 name="type" style={{ marginBottom: "15px" }}>
+                <h5
+                  name="type"
+                  style={{ marginBottom: "15px", textAlign: "justify" }}
+                >
                   Contract types
                 </h5>
-                <div>
+                <div className="radiofilter">
                   <label>
                     <input
                       type="radio"
@@ -120,10 +125,10 @@ const Jobs = () => {
                       value="All"
                       defaultChecked={true}
                     />
-                    <span>All </span>
+                    <span>All</span>
                   </label>
                 </div>
-                <div>
+                <div className="radiofilter">
                   <label>
                     <input
                       type="radio"
@@ -131,10 +136,10 @@ const Jobs = () => {
                       onChange={handleFilterChange}
                       value="Contract"
                     />
-                    <span>Contract </span>
+                    <span>Contract</span>
                   </label>
                 </div>
-                <div>
+                <div className="radiofilter">
                   <label>
                     <input
                       type="radio"
@@ -142,10 +147,10 @@ const Jobs = () => {
                       onChange={handleFilterChange}
                       value="Full time"
                     />
-                    <span>Full time </span>
+                    <span>Full time</span>
                   </label>
                 </div>
-                <div>
+                <div className="radiofilter">
                   <label>
                     <input
                       type="radio"
@@ -153,14 +158,17 @@ const Jobs = () => {
                       onClick={handleFilterChange}
                       value="Internship"
                     />
-                    <span>Internship </span>
+                    <span>Internship</span>
                   </label>
                 </div>
                 <br />
-                <h5 name="category" style={{ marginBottom: "15px" }}>
+                <h5
+                  name="category"
+                  style={{ marginBottom: "15px", textAlign: "justify" }}
+                >
                   Job categories
                 </h5>
-                <div>
+                <div className="radiofilter">
                   <label>
                     <input
                       type="radio"
@@ -169,10 +177,10 @@ const Jobs = () => {
                       value="All"
                       defaultChecked={true}
                     />
-                    <span>All </span>
+                    <span>All</span>
                   </label>
                 </div>
-                <div>
+                <div className="radiofilter">
                   <label>
                     <input
                       type="radio"
@@ -180,10 +188,10 @@ const Jobs = () => {
                       onClick={handleFilterChange}
                       value="Accounting, Finance and Marketing"
                     />
-                    <span>Accounting, Finance and Marketing </span>
+                    <span>Accounting, Finance and Marketing</span>
                   </label>
                 </div>
-                <div>
+                <div className="radiofilter">
                   <label>
                     <input
                       type="radio"
@@ -194,7 +202,7 @@ const Jobs = () => {
                     <span>Computer sciences and Networking</span>
                   </label>
                 </div>
-                <div>
+                <div className="radiofilter">
                   <label>
                     <input
                       type="radio"
@@ -205,7 +213,7 @@ const Jobs = () => {
                     <span>Call center</span>
                   </label>
                 </div>
-                <div>
+                <div className="radiofilter">
                   <label>
                     <input
                       type="radio"
@@ -216,7 +224,7 @@ const Jobs = () => {
                     <span>Industrial engineering</span>
                   </label>
                 </div>
-                <div>
+                <div className="radiofilter">
                   <label>
                     <input
                       type="radio"
@@ -224,10 +232,10 @@ const Jobs = () => {
                       onClick={handleFilterChange}
                       value="Services sector"
                     />
-                    <span>Services sector </span>
+                    <span>Services sector</span>
                   </label>
                 </div>
-                <div>
+                <div className="radiofilter">
                   <label>
                     <input
                       type="radio"
@@ -235,14 +243,17 @@ const Jobs = () => {
                       onClick={handleFilterChange}
                       value="Others"
                     />
-                    <span>Others </span>
+                    <span>Others</span>
                   </label>
                 </div>
                 <br />
-                <h5 name="careerLevel" style={{ marginBottom: "15px" }}>
+                <h5
+                  name="careerLevel"
+                  style={{ marginBottom: "15px", textAlign: "justify" }}
+                >
                   Career levels
                 </h5>
-                <div>
+                <div className="radiofilter">
                   <label>
                     <input
                       type="radio"
@@ -251,10 +262,10 @@ const Jobs = () => {
                       value="All"
                       defaultChecked={true}
                     />
-                    <span>All </span>
+                    <span>All</span>
                   </label>
                 </div>
-                <div>
+                <div className="radiofilter">
                   <label>
                     <input
                       type="radio"
@@ -262,10 +273,10 @@ const Jobs = () => {
                       onClick={handleFilterChange}
                       value="Entry-Level"
                     />
-                    <span>Entry-Level </span>
+                    <span>Entry-Level</span>
                   </label>
                 </div>
-                <div>
+                <div className="radiofilter">
                   <label>
                     <input
                       type="radio"
@@ -273,10 +284,10 @@ const Jobs = () => {
                       onClick={handleFilterChange}
                       value="Intermediate"
                     />
-                    <span>Intermediate </span>
+                    <span>Intermediate</span>
                   </label>
                 </div>
-                <div>
+                <div className="radiofilter">
                   <label>
                     <input
                       type="radio"
@@ -284,10 +295,10 @@ const Jobs = () => {
                       onClick={handleFilterChange}
                       value="Mid-Level"
                     />
-                    <span>Mid-Level </span>
+                    <span>Mid-Level</span>
                   </label>
                 </div>
-                <div>
+                <div className="radiofilter">
                   <label>
                     <input
                       type="radio"
@@ -295,7 +306,7 @@ const Jobs = () => {
                       onClick={handleFilterChange}
                       value="Senior or executive-level"
                     />
-                    <span>Senior or executive-level </span>
+                    <span>Senior or executive-level</span>
                   </label>
                 </div>
                 <br />
@@ -315,7 +326,7 @@ const Jobs = () => {
                         <span>
                           {" "}
                           {job?.salary}
-                          <sup> DT</sup>
+                          <sup>DT</sup>
                         </span>
                         <h4>
                           {job?.title <= 40

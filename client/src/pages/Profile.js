@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import {
   Tab,
   Col,
@@ -10,27 +10,29 @@ import {
   Form,
   Container,
 } from "react-bootstrap";
-
 import "../assets/css/bootstrap.min.css";
 import "../assets/css/font-awesome.css";
+import "../assets/css/profileCard.css";
 import "../assets/css/style.css";
 import axios from "axios";
 import UserTable from "../Components/UserTable";
 import ReceivedApplications from "../Components/ReceivedApplications";
 import MyPosts from "../Components/MyPosts";
+import profileAvatar from "../assets/images/profile-avatar2.png";
+import bannerImage from "../assets/images/banner-image-1-1920x500.jpg";
 
 import { Document, Page, pdfjs } from "react-pdf";
-// import { getApplication } from "../JS/actions/application";
+import { getApplication } from "../JS/actions/application";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 const Profile = (history) => {
   const user = useSelector((state) => state.userReducer.user);
-  // const application = useSelector(
-  //   (state) => state.applicationReducer.application
-  // );
+  const application = useSelector(
+    (state) => state.applicationReducer.application
+  );
   const [savedjobs, setSavedjobs] = useState([]);
   const uploadInput = useRef(null);
   const [resume, setResume] = useState({});
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     async function fetchData() {
@@ -40,16 +42,15 @@ const Profile = (history) => {
           params: { savedJobsIds: JSON.stringify(user?.savedJobs) },
         });
         setSavedjobs(result.data.jobsToGet);
-        // } else {
-        //   dispatch(getApplication());
-        // }
+      } else {
+        dispatch(getApplication());
       }
     }
     fetchData();
   }, [user]);
 
   const handleChange = (event) => {
-    //setResume(e.target.files[0]);
+    setResume(event.target.files[0]);
     var r = new FileReader();
     r.readAsDataURL(event.target.files[0]);
     r.onloadend = (e) => {
@@ -96,7 +97,7 @@ const Profile = (history) => {
           className="section section-bg"
           id="call-to-action"
           style={{
-            backgroundImage: "url(assets/images/banner-image-1-1920x500.jpg)",
+            backgroundImage: `url(${bannerImage}`,
           }}
         >
           <div className="container">
@@ -105,7 +106,9 @@ const Profile = (history) => {
                 <div className="cta-content">
                   <br />
                   <br />
-                  <h2>Welcome to your profile</h2>
+                  <h2>
+                    Welcome to your <em>profile</em>
+                  </h2>
                 </div>
               </div>
             </div>
@@ -167,7 +170,9 @@ const Profile = (history) => {
                 <div className="cta-content">
                   <br />
                   <br />
-                  <h2>Welcome to your profile</h2>
+                  <h2>
+                    Welcome to your <em>profile</em>
+                  </h2>
                 </div>
               </div>
             </div>
@@ -183,25 +188,92 @@ const Profile = (history) => {
                 <Col sm={3}>
                   <Nav variant="pills" className="flex-column">
                     <Nav.Item>
-                      <Nav.Link eventKey="first">Contact Information</Nav.Link>
+                      <Nav.Link eventKey="first" style={{ color: "#424141" }}>
+                        Contact Information
+                      </Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                      <Nav.Link eventKey="second">
+                      <Nav.Link eventKey="second" style={{ color: "#424141" }}>
                         Received Applications
                       </Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                      <Nav.Link eventKey="third">My Posts</Nav.Link>
+                      <Nav.Link eventKey="third" style={{ color: "#424141" }}>
+                        My Posts
+                      </Nav.Link>
                     </Nav.Item>
                   </Nav>
                 </Col>
                 <Col sm={9}>
                   <Tab.Content>
                     <Tab.Pane eventKey="first">
-                      <h4>User Name: {user?.name}</h4>
-                      <h4>E-mail Address: {user?.email}</h4>
-                      <h4>Phone Number: {user?.phone}</h4>
-                      <h4>Address: {user?.address}</h4>
+                      <div
+                        className="page-content page-container"
+                        id="page-content"
+                      >
+                        <div className="card user-card-full">
+                          <div className="row m-l-0 m-r-0">
+                            <div className="col-sm-4 bg-c-lite-green user-profile">
+                              <div className="card-block text-center text-white">
+                                <div className="m-b-25">
+                                  {" "}
+                                  <img
+                                    src={profileAvatar}
+                                    className="img-radius"
+                                    alt="User-Profile-Image"
+                                    style={{ width: "150px" }}
+                                  />{" "}
+                                </div>
+                                <h6 className="f-w-600">{user?.name}</h6>
+                                <p>{user?.name}</p>{" "}
+                                <i className=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16" />
+                              </div>
+                            </div>
+                            <div className="col-sm-8">
+                              <div className="card-block">
+                                <h4 className="m-b-20 p-b-5 b-b-default f-w-600">
+                                  Information
+                                </h4>
+                                <div className="row">
+                                  <div className="col-sm-6">
+                                    <h5 className="m-b-10 f-w-600">Email :</h5>
+                                    <h6 className="text-muted f-w-400">
+                                      {user?.email}
+                                    </h6>
+                                  </div>
+                                  <div className="col-sm-6">
+                                    <h5 className="m-b-10 f-w-600">Phone :</h5>
+                                    <h6 className="text-muted f-w-400">
+                                      {user?.phone}
+                                    </h6>
+                                  </div>
+                                </div>
+                                <div className="row">
+                                  <div className="col-sm-6">
+                                    <h5 className="m-b-10 f-w-600">
+                                      Address :
+                                    </h5>
+                                    <h6 className="text-muted f-w-400">
+                                      {user?.address}
+                                    </h6>
+                                  </div>
+                                  <div className="col-sm-6">
+                                    <h5 className="m-b-10 f-w-600">
+                                      Website :
+                                    </h5>
+                                    <h6 className="text-muted f-w-400">
+                                      {user?.website}
+                                    </h6>
+                                  </div>
+                                </div>
+                              </div>
+                              <Button variant="primary" type="submit">
+                                Modify my account
+                              </Button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </Tab.Pane>
                     <Tab.Pane eventKey="second">
                       <ReceivedApplications />
@@ -237,7 +309,7 @@ const Profile = (history) => {
           className="section section-bg"
           id="call-to-action"
           style={{
-            backgroundImage: "url(assets/images/banner-image-1-1920x500.jpg)",
+            backgroundImage: `url(${bannerImage}`,
           }}
         >
           <div className="container">
@@ -259,29 +331,97 @@ const Profile = (history) => {
           <div className="container">
             <br />
             <br />
-
             <Tab.Container id="left-tabs-example" defaultActiveKey="first">
               <Row>
                 <Col sm={3}>
                   <Nav variant="pills" className="flex-column">
                     <Nav.Item>
-                      <Nav.Link eventKey="first">Contact Information</Nav.Link>
+                      <Nav.Link eventKey="first" style={{ color: "#424141" }}>
+                        Contact Information
+                      </Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                      <Nav.Link eventKey="second">Import Resume</Nav.Link>
+                      <Nav.Link eventKey="second" style={{ color: "#424141" }}>
+                        Import Resume
+                      </Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                      <Nav.Link eventKey="third">Saved Jobs</Nav.Link>
+                      <Nav.Link eventKey="third" style={{ color: "#424141" }}>
+                        Saved Jobs
+                      </Nav.Link>
                     </Nav.Item>
                   </Nav>
                 </Col>
                 <Col sm={9}>
                   <Tab.Content>
                     <Tab.Pane eventKey="first">
-                      <h4>User Name: {user?.name}</h4>
-                      <h4>Email: {user?.email}</h4>
-                      <h4>Phone Number: {user?.phone}</h4>
-                      <h4>Address: {user?.address}</h4>
+                      <div
+                        className="page-content page-container"
+                        id="page-content"
+                      >
+                        <div className="card user-card-full">
+                          <div className="row m-l-0 m-r-0">
+                            <div className="col-sm-4 bg-c-lite-green user-profile">
+                              <div className="card-block text-center text-white">
+                                <div className="m-b-25">
+                                  {" "}
+                                  <img
+                                    src={profileAvatar}
+                                    className="img-radius"
+                                    alt="User-Profile-Image"
+                                    style={{ width: "150px" }}
+                                  />{" "}
+                                </div>
+                                <h6 className="f-w-600">{user?.name}</h6>
+                                <p>{user?.name}</p>{" "}
+                                <i className=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16" />
+                              </div>
+                            </div>
+                            <div className="col-sm-8">
+                              <div className="card-block">
+                                <h4 className="m-b-20 p-b-5 b-b-default f-w-600">
+                                  Information
+                                </h4>
+                                <div className="row">
+                                  <div className="col-sm-6">
+                                    <h5 className="m-b-10 f-w-600">Email :</h5>
+                                    <h6 className="text-muted f-w-400">
+                                      {user?.email}
+                                    </h6>
+                                  </div>
+                                  <div className="col-sm-6">
+                                    <h5 className="m-b-10 f-w-600">Phone :</h5>
+                                    <h6 className="text-muted f-w-400">
+                                      {user?.phone}
+                                    </h6>
+                                  </div>
+                                </div>
+                                <div className="row">
+                                  <div className="col-sm-6">
+                                    <h5 className="m-b-10 f-w-600">
+                                      Address :
+                                    </h5>
+                                    <h6 className="text-muted f-w-400">
+                                      {user?.address}
+                                    </h6>
+                                  </div>
+                                  <div className="col-sm-6">
+                                    <h5 className="m-b-10 f-w-600">
+                                      Website :
+                                    </h5>
+                                    <h6 className="text-muted f-w-400">
+                                      {user?.website}
+                                    </h6>
+                                  </div>
+                                </div>
+                              </div>
+                              <Button variant="primary" type="submit">
+                                Modify my account
+                              </Button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </Tab.Pane>
                     <Tab.Pane eventKey="second">
                       <Container>
